@@ -137,3 +137,33 @@ module ucy_7442 (
 	assign p11 = ~( a & ~b & ~c &  d);
 
 endmodule
+
+// Simple d-latch posedge for use in 7474
+// TODO async (re)set?
+module dff_747 (
+	input ns, nr, clk, d,
+	output q, nq	
+);
+
+	assign nq = ~q;
+	
+	always_latch @(posedge clk) begin
+		if(~nr | ~ns)
+			q <= nr;
+		else
+			q <= d;
+	end
+
+endmodule
+
+module ucy_7474 (
+	input p1, p2, p3, p4, 
+	output p5, p6,
+	input p7,
+	output p8, p9,
+	input p10, p11, p12, p13, p14
+);
+	dff_747 latch_1(p4, p1, p3, p2, p5, p6);
+	dff_747 latch_2(p10, p13, p11, p12, p9, p8);
+
+endmodule
