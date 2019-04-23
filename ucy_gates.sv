@@ -156,6 +156,7 @@ module dff_747 (
 
 endmodule
 
+// double d-latch @posedge
 module ucy_7474 (
 	input p1, p2, p3, p4, 
 	output p5, p6,
