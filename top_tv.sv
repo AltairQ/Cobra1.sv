@@ -1,21 +1,42 @@
 `timescale 1ns/100ps
 module topcore_tb;
-	reg clk,reset;
- 
-	// tv80_core topcore(/*AUTOARG*/
-	// // Outputs
-	// m1_n, iorq, no_read, write, rfsh_n, halt_n, busak_n, A, dout, mc,
-	// ts, intcycle_n, IntE, stop,
-	// // Inputs
-	// reset_n, clk, cen, wait_n, int_n, nmi_n, busrq_n, dinst, di
-	// );
+	logic clk,reset;
 
+	logic [15:0] addr;
+	logic [7:0] mem_dout;
+	logic [7:0] mem_din;
+	logic rd_n, wr_n;
 
-	// NOP loop, IP increasing
-	tv80_core topcore(
-	.reset_n(~reset), .clk(clk), .cen(1'b1), .wait_n(1'b1), .int_n(1'b1), .nmi_n(1'b1), .busrq_n(1'b1), .dinst(8'b0), .di(8'b0)
+	mem_module memory(
+		.clk(clk), // clock
+		.addr(addr), // mem address (8bit words)
+		.data_in(mem_din), // input port
+		.rd(~rd_n), // read signal
+		.wr(~wr_n), // write signal
+		.data_out(mem_dout)
 	);
 
+	tv80s topcore(
+	// Outputs
+	// .m1_n,
+	// .mreq_n,
+	// .iorq_n,
+	.rd_n(rd_n),
+	.wr_n(wr_n),
+	// .rfsh_n,
+	// .halt_n,
+	// .busak_n,
+	.A(addr),
+	.dout(mem_din),
+	// Inputs
+	.reset_n(~reset),
+	.clk(clk),
+	.wait_n(1'b1),
+	.int_n(1'b1),
+	.nmi_n(1'b1),
+	.busrq_n(1'b1),
+	.di(mem_dout)
+	);
 
 
 		initial
