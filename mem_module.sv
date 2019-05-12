@@ -8,6 +8,12 @@ module mem_module (
 );
 	logic [7:0] memory[0:65535];
 
+	integer i;
+
+	initial
+		for(i = 0; i <= 65535; i++)
+			memory[i] = 0;
+
 	initial
 		$readmemh("z80_loop.hex", memory, 0, 5);
 
