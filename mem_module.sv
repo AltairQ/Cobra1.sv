@@ -11,15 +11,17 @@ module mem_module (
 	integer i;
 
 	initial
+	begin
 		for(i = 0; i <= 65535; i++)
 			memory[i] = 0;
+		$readmemh("z80_write_loop.hex", memory, 0, 11);
+		// $readmemh("z80_loop.hex", memory, 0, 5);
+	end
 
-	initial
-		$readmemh("z80_loop.hex", memory, 0, 5);
-
-	always_ff @(posedge clk)
+	//always_ff forces synthesability
+	always @(posedge clk)
 		begin
-			data_out <= memory[addr];
+			if(rd) data_out <= memory[addr];
 			if(wr) memory[addr] <= data_in;
 		end
 
