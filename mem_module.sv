@@ -14,14 +14,15 @@ module mem_module (
 	begin
 		for(i = 0; i <= 65535; i++)
 			memory[i] = 0;
-		$readmemh("z80_write_loop.hex", memory, 0, 11);
-		// $readmemh("z80_loop.hex", memory, 0, 5);
+		// $readmemh("z80_nop.hex", memory, 0, 5);
+		$readmemh("z80_loop.hex", memory, 0, 5);
 	end
 
-	//always_ff forces synthesability
+	assign data_out = memory[addr];
+
 	always @(posedge clk)
 		begin
-			if(rd) data_out <= memory[addr];
+			// if(rd) data_out <= memory[addr];
 			if(wr) memory[addr] <= data_in;
 		end
 

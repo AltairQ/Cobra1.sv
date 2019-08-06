@@ -1,11 +1,16 @@
 `timescale 1ns/100ps
-module topcore_tb;
-	logic clk,reset;
+module top_tv(input clk, input reset, output [15:0] addr);
+	// input logic clk,reset;
 
-	logic [15:0] addr;
+
+
+	// logic [15:0] addr;
 	logic [7:0] mem_dout;
 	logic [7:0] mem_din;
 	logic rd_n, wr_n;
+
+
+	logic m1_n, mreq_n, iorq_n, rfsh_n, halt_n, busak_n;
 
 	mem_module memory(
 		.clk(clk), // clock
@@ -18,14 +23,14 @@ module topcore_tb;
 
 	tv80s topcore(
 	// Outputs
-	// .m1_n,
-	// .mreq_n,
-	// .iorq_n,
+	.m1_n(m1_n),
+	.mreq_n(mreq_n),
+	.iorq_n(iorq_n),
 	.rd_n(rd_n),
 	.wr_n(wr_n),
-	// .rfsh_n,
-	// .halt_n,
-	// .busak_n,
+	.rfsh_n(rfsh_n),
+	.halt_n(halt_n),
+	.busak_n(busak_n),
 	.A(addr),
 	.dout(mem_din),
 	// Inputs
@@ -39,14 +44,4 @@ module topcore_tb;
 	);
 
 
-		initial
-					clk= 1'b0;
-		always
-				#5  clk=~clk; 
-				initial
-					begin
-							 #5 reset=1'b1;
-							 #50 reset=1'b0;
-							 #500 $finish;
-					end
-		endmodule
+	endmodule
