@@ -16,6 +16,7 @@ module top_tv(input clk, input reset, output [15:0] addr);
 		.clk(clk), // clock
 		.addr(addr), // mem address (8bit words)
 		.data_in(mem_din), // input port
+		.reset(reset),
 		.rd(~rd_n), // read signal
 		.wr(~wr_n), // write signal
 		.data_out(mem_dout)

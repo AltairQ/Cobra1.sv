@@ -2,6 +2,7 @@ module mem_module (
 	input clk, // clock
 	input [15:0] addr, // mem address (8bit words)
 	input [7:0] data_in, // input port
+	input reset,
 	input rd, // read signal
 	input wr, // write signal
 	output logic [7:0] data_out
@@ -15,7 +16,8 @@ module mem_module (
 		for(i = 0; i <= 65535; i++)
 			memory[i] = 0;
 		// $readmemh("z80_nop.hex", memory, 0, 5);
-		$readmemh("z80_loop.hex", memory, 0, 5);
+		$readmemh("z80_loop.hex", memory);
+		// $readmemh("z80_write_loop.hex", memory);
 	end
 
 	assign data_out = memory[addr];
@@ -23,7 +25,7 @@ module mem_module (
 	always @(posedge clk)
 		begin
 			// if(rd) data_out <= memory[addr];
-			if(wr) memory[addr] <= data_in;
+			if(wr && !reset) memory[addr] <= data_in;
 		end
 
 

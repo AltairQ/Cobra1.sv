@@ -1,6 +1,7 @@
 #include "Vtop_tv.h"
 #include "verilated.h"
 #include <iostream>
+#include <cstdio>
 
 int main(int argc, char** argv, char** env) {
 	Verilated::commandArgs(argc, argv);
@@ -14,10 +15,10 @@ int main(int argc, char** argv, char** env) {
 	int cnt = 0; 
 	uint8_t clk = 0;
 
-	for(int i = 0; i < 20; i++)
-	std::cout << (int) top->top_tv__DOT__memory__DOT__memory[i] << std::endl;
+	// for(int i = 0; i < 20; i++)
+	// std::cout << (int) top->top_tv__DOT__memory__DOT__memory[i] << std::endl;
 
-	while (!Verilated::gotFinish() && cnt < 100) {
+	while (!Verilated::gotFinish() && cnt < 10) {
 
 		top->reset = cnt < 10 ? 1 : 0;
 
@@ -28,7 +29,9 @@ int main(int argc, char** argv, char** env) {
 
 	 	cnt += 1;
 
-	 	std::cout << (uint16_t)top->addr << ", " << (int)top->top_tv__DOT__topcore__DOT__i_tv80_core__DOT__PC << "\n";
+	 	if(cnt == 1)
+	 		for(int i = 0; i < 20; i++)
+	 			printf("%02X\n",  top->top_tv__DOT__memory__DOT__memory[i]);
 	}
 	delete top;
 	exit(0);

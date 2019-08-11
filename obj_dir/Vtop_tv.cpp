@@ -96,7 +96,7 @@ void Vtop_tv::_initial__TOP__1(Vtop_tv__Syms* __restrict vlSymsp) {
     // Begin mtask footprint  all: 
     VL_SIGW(__Vtemp2,95,0,3);
     // Body
-    // INITIAL at mem_module.sv:13
+    // INITIAL at mem_module.sv:14
     vlTOPp->top_tv__DOT__memory__DOT__i = 0U;
     while (VL_GTES_III(1,32,32, 0xffffU, vlTOPp->top_tv__DOT__memory__DOT__i)) {
 	vlTOPp->top_tv__DOT__memory__DOT__memory[(0xffffU 
@@ -108,7 +108,7 @@ void Vtop_tv::_initial__TOP__1(Vtop_tv__Syms* __restrict vlSymsp) {
     __Vtemp2[1U] = 0x6c6f6f70U;
     __Vtemp2[2U] = 0x7a38305fU;
     VL_READMEM_W(true,8,65536, 0,3, __Vtemp2, vlTOPp->top_tv__DOT__memory__DOT__memory
-		 ,0U,5U);
+		 ,0,~0);
 }
 
 VL_INLINE_OPT void Vtop_tv::_sequent__TOP__2(Vtop_tv__Syms* __restrict vlSymsp) {
@@ -281,8 +281,9 @@ VL_INLINE_OPT void Vtop_tv::_sequent__TOP__3(Vtop_tv__Syms* __restrict vlSymsp) 
 			       << 1U)));
 	}
     }
-    // ALWAYS at mem_module.sv:23
-    if ((1U & (~ (IData)(vlTOPp->top_tv__DOT__wr_n)))) {
+    // ALWAYS at mem_module.sv:25
+    if ((1U & ((~ (IData)(vlTOPp->top_tv__DOT__wr_n)) 
+	       & (~ (IData)(vlTOPp->reset))))) {
 	__Vdlyvval__top_tv__DOT__memory__DOT__memory__v0 
 	    = vlTOPp->top_tv__DOT__mem_din;
 	__Vdlyvset__top_tv__DOT__memory__DOT__memory__v0 = 1U;
@@ -299,7 +300,7 @@ VL_INLINE_OPT void Vtop_tv::_sequent__TOP__3(Vtop_tv__Syms* __restrict vlSymsp) 
 	vlTOPp->top_tv__DOT__topcore__DOT__i_tv80_core__DOT__i_reg__DOT__RegsH[__Vdlyvdim0__top_tv__DOT__topcore__DOT__i_tv80_core__DOT__i_reg__DOT__RegsH__v0] 
 	    = __Vdlyvval__top_tv__DOT__topcore__DOT__i_tv80_core__DOT__i_reg__DOT__RegsH__v0;
     }
-    // ALWAYSPOST at mem_module.sv:26
+    // ALWAYSPOST at mem_module.sv:28
     if (__Vdlyvset__top_tv__DOT__memory__DOT__memory__v0) {
 	vlTOPp->top_tv__DOT__memory__DOT__memory[__Vdlyvdim0__top_tv__DOT__memory__DOT__memory__v0] 
 	    = __Vdlyvval__top_tv__DOT__memory__DOT__memory__v0;
