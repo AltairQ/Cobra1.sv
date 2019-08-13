@@ -11,27 +11,39 @@ int main(int argc, char** argv, char** env) {
 
 	top->reset = 0;
 
+	int mem_start = 0xc000;
+	int last_tick = 40000;
+
 
 	int cnt = 0; 
 	uint8_t clk = 0;
 
-	// for(int i = 0; i < 20; i++)
-	// std::cout << (int) top->top_tv__DOT__memory__DOT__memory[i] << std::endl;
+	while (!Verilated::gotFinish() && cnt < last_tick) {
 
-	while (!Verilated::gotFinish() && cnt < 10) {
+		// let's give it a couple of cycles to reset
+		// I believe Z80's manual specifies 5 cycles
+		// This is probably unnecessary here but oh well
+		top->reset = cnt < 5 ? 1 : 0;
 
-		top->reset = cnt < 10 ? 1 : 0;
-
+		// Tick
 		top->clk = 0;
 	 	top->eval();
 		top->clk = 1;
 	 	top->eval();
 
+	 	// sanity check
+	 	if(cnt % 100 == 1)
+	 		printf("> ADDR = %04X", top->addr);
+
 	 	cnt += 1;
 
-	 	if(cnt == 1)
-	 		for(int i = 0; i < 20; i++)
-	 			printf("%02X\n",  top->top_tv__DOT__memory__DOT__memory[i]);
+	 	// memory sanity check
+	 	if(cnt == last_tick)
+	 	{
+	 		puts("\n\n");
+	 		for(int i = 0xf800; i <= 0xffff; i++)
+	 			printf("%02X", top->top_tv__DOT__memory__DOT__memory[i]);
+	 	}
 	}
 	delete top;
 	exit(0);

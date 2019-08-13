@@ -94,9 +94,9 @@ void Vtop_tv::_initial__TOP__1(Vtop_tv__Syms* __restrict vlSymsp) {
     Vtop_tv* __restrict vlTOPp VL_ATTR_UNUSED = vlSymsp->TOPp;
     // Variables
     // Begin mtask footprint  all: 
-    VL_SIGW(__Vtemp2,95,0,3);
+    VL_SIGW(__Vtemp2,127,0,4);
     // Body
-    // INITIAL at mem_module.sv:14
+    // INITIAL at mem_module.sv:15
     vlTOPp->top_tv__DOT__memory__DOT__i = 0U;
     while (VL_GTES_III(1,32,32, 0xffffU, vlTOPp->top_tv__DOT__memory__DOT__i)) {
 	vlTOPp->top_tv__DOT__memory__DOT__memory[(0xffffU 
@@ -105,10 +105,11 @@ void Vtop_tv::_initial__TOP__1(Vtop_tv__Syms* __restrict vlSymsp) {
 					       + vlTOPp->top_tv__DOT__memory__DOT__i);
     }
     __Vtemp2[0U] = 0x2e686578U;
-    __Vtemp2[1U] = 0x6c6f6f70U;
-    __Vtemp2[2U] = 0x7a38305fU;
-    VL_READMEM_W(true,8,65536, 0,3, __Vtemp2, vlTOPp->top_tv__DOT__memory__DOT__memory
-		 ,0,~0);
+    __Vtemp2[1U] = 0x5f726f6dU;
+    __Vtemp2[2U] = 0x6f627261U;
+    __Vtemp2[3U] = 0x63U;
+    VL_READMEM_W(true,8,65536, 0,4, __Vtemp2, vlTOPp->top_tv__DOT__memory__DOT__memory
+		 ,0xc000U,~0);
 }
 
 VL_INLINE_OPT void Vtop_tv::_sequent__TOP__2(Vtop_tv__Syms* __restrict vlSymsp) {
@@ -230,6 +231,14 @@ VL_INLINE_OPT void Vtop_tv::_sequent__TOP__3(Vtop_tv__Syms* __restrict vlSymsp) 
 		= vlTOPp->top_tv__DOT__topcore__DOT__i_tv80_core__DOT__RegAddrA;
 	}
     }
+    // ALWAYS at top_tv.sv:18
+    if (vlTOPp->reset) {
+	vlTOPp->top_tv__DOT__memory_reloc_enable = 1U;
+    } else {
+	if ((1U & (~ (IData)(vlTOPp->top_tv__DOT__iorq_n)))) {
+	    vlTOPp->top_tv__DOT__memory_reloc_enable = 0U;
+	}
+    }
     // ALWAYS at tv80_core/tv80_core.v:881
     if ((1U & (~ (IData)(vlTOPp->top_tv__DOT__topcore__DOT__i_tv80_core__DOT__BusAck)))) {
 	vlTOPp->top_tv__DOT__topcore__DOT__i_tv80_core__DOT__RegAddrC 
@@ -281,9 +290,11 @@ VL_INLINE_OPT void Vtop_tv::_sequent__TOP__3(Vtop_tv__Syms* __restrict vlSymsp) 
 			       << 1U)));
 	}
     }
-    // ALWAYS at mem_module.sv:25
-    if ((1U & ((~ (IData)(vlTOPp->top_tv__DOT__wr_n)) 
-	       & (~ (IData)(vlTOPp->reset))))) {
+    // ALWAYS at mem_module.sv:26
+    if ((1U & ((((~ (IData)(vlTOPp->top_tv__DOT__wr_n)) 
+		 & (~ (IData)(vlTOPp->reset))) & (~ (IData)(vlTOPp->top_tv__DOT__mreq_n))) 
+	       & (~ ((0xc000U <= (IData)(vlTOPp->addr)) 
+		     & (0xc800U > (IData)(vlTOPp->addr))))))) {
 	__Vdlyvval__top_tv__DOT__memory__DOT__memory__v0 
 	    = vlTOPp->top_tv__DOT__mem_din;
 	__Vdlyvset__top_tv__DOT__memory__DOT__memory__v0 = 1U;
@@ -300,7 +311,7 @@ VL_INLINE_OPT void Vtop_tv::_sequent__TOP__3(Vtop_tv__Syms* __restrict vlSymsp) 
 	vlTOPp->top_tv__DOT__topcore__DOT__i_tv80_core__DOT__i_reg__DOT__RegsH[__Vdlyvdim0__top_tv__DOT__topcore__DOT__i_tv80_core__DOT__i_reg__DOT__RegsH__v0] 
 	    = __Vdlyvval__top_tv__DOT__topcore__DOT__i_tv80_core__DOT__i_reg__DOT__RegsH__v0;
     }
-    // ALWAYSPOST at mem_module.sv:28
+    // ALWAYSPOST at mem_module.sv:30
     if (__Vdlyvset__top_tv__DOT__memory__DOT__memory__v0) {
 	vlTOPp->top_tv__DOT__memory__DOT__memory[__Vdlyvdim0__top_tv__DOT__memory__DOT__memory__v0] 
 	    = __Vdlyvval__top_tv__DOT__memory__DOT__memory__v0;
@@ -320,6 +331,9 @@ void Vtop_tv::_settle__TOP__4(Vtop_tv__Syms* __restrict vlSymsp) {
 	   | (vlTOPp->top_tv__DOT__topcore__DOT__i_tv80_core__DOT__i_reg__DOT__RegsH
 	      [vlTOPp->top_tv__DOT__topcore__DOT__i_tv80_core__DOT__RegAddrC] 
 	      << 8U));
+    vlTOPp->addr = ((IData)(vlTOPp->top_tv__DOT__memory_reloc_enable)
+		     ? (0xc000U | (IData)(vlTOPp->top_tv__DOT__addr_raw))
+		     : (IData)(vlTOPp->top_tv__DOT__addr_raw));
     // ALWAYS at tv80_core/tv80_mcode.v:202
     vlTOPp->top_tv__DOT__topcore__DOT__i_tv80_core__DOT__IMode = 3U;
     if ((0U != (IData)(vlTOPp->top_tv__DOT__topcore__DOT__i_tv80_core__DOT__ISet))) {
@@ -17804,6 +17818,30 @@ VL_INLINE_OPT void Vtop_tv::_sequent__TOP__5(Vtop_tv__Syms* __restrict vlSymsp) 
     // Body
     vlTOPp->top_tv__DOT__topcore__DOT__i_tv80_core__DOT__Alternate 
 	= vlTOPp->__Vdly__top_tv__DOT__topcore__DOT__i_tv80_core__DOT__Alternate;
+    // ALWAYS at tv80_core/tv80s.v:100
+    if (vlTOPp->top_tv__DOT____Vcellinp__topcore__reset_n) {
+	vlTOPp->top_tv__DOT__iorq_n = 1U;
+	if ((1U & (IData)(vlTOPp->top_tv__DOT__topcore__DOT__i_tv80_core__DOT__mcycle))) {
+	    if ((2U & (IData)(vlTOPp->top_tv__DOT__topcore__DOT__i_tv80_core__DOT__tstate))) {
+		vlTOPp->top_tv__DOT__iorq_n = (1U & 
+					       (~ (IData)(vlTOPp->top_tv__DOT__topcore__DOT__i_tv80_core__DOT__IntCycle)));
+	    }
+	} else {
+	    if ((1U & ((((IData)(vlTOPp->top_tv__DOT__topcore__DOT__i_tv80_core__DOT__tstate) 
+			 >> 1U) & (~ (IData)(vlTOPp->top_tv__DOT__topcore__DOT__no_read))) 
+		       & (~ (IData)(vlTOPp->top_tv__DOT__topcore__DOT__write))))) {
+		vlTOPp->top_tv__DOT__iorq_n = (1U & 
+					       (~ (IData)(vlTOPp->top_tv__DOT__topcore__DOT__i_tv80_core__DOT__iorq_i)));
+	    }
+	    if ((((IData)(vlTOPp->top_tv__DOT__topcore__DOT__i_tv80_core__DOT__tstate) 
+		  >> 1U) & (IData)(vlTOPp->top_tv__DOT__topcore__DOT__write))) {
+		vlTOPp->top_tv__DOT__iorq_n = (1U & 
+					       (~ (IData)(vlTOPp->top_tv__DOT__topcore__DOT__i_tv80_core__DOT__iorq_i)));
+	    }
+	}
+    } else {
+	vlTOPp->top_tv__DOT__iorq_n = 1U;
+    }
     // ALWAYS at tv80_core/tv80_core.v:375
     if (vlTOPp->top_tv__DOT____Vcellinp__topcore__reset_n) {
 	if ((1U & (~ (IData)(vlTOPp->top_tv__DOT__topcore__DOT__i_tv80_core__DOT__BusAck)))) {
@@ -17843,6 +17881,27 @@ VL_INLINE_OPT void Vtop_tv::_sequent__TOP__5(Vtop_tv__Syms* __restrict vlSymsp) 
 	}
     } else {
 	vlTOPp->top_tv__DOT__wr_n = 1U;
+    }
+    // ALWAYS at tv80_core/tv80s.v:100
+    if (vlTOPp->top_tv__DOT____Vcellinp__topcore__reset_n) {
+	vlTOPp->top_tv__DOT__mreq_n = 1U;
+	if ((1U & (IData)(vlTOPp->top_tv__DOT__topcore__DOT__i_tv80_core__DOT__mcycle))) {
+	    if ((2U & (IData)(vlTOPp->top_tv__DOT__topcore__DOT__i_tv80_core__DOT__tstate))) {
+		vlTOPp->top_tv__DOT__mreq_n = vlTOPp->top_tv__DOT__topcore__DOT__i_tv80_core__DOT__IntCycle;
+	    }
+	} else {
+	    if ((1U & ((((IData)(vlTOPp->top_tv__DOT__topcore__DOT__i_tv80_core__DOT__tstate) 
+			 >> 1U) & (~ (IData)(vlTOPp->top_tv__DOT__topcore__DOT__no_read))) 
+		       & (~ (IData)(vlTOPp->top_tv__DOT__topcore__DOT__write))))) {
+		vlTOPp->top_tv__DOT__mreq_n = vlTOPp->top_tv__DOT__topcore__DOT__i_tv80_core__DOT__iorq_i;
+	    }
+	    if ((((IData)(vlTOPp->top_tv__DOT__topcore__DOT__i_tv80_core__DOT__tstate) 
+		  >> 1U) & (IData)(vlTOPp->top_tv__DOT__topcore__DOT__write))) {
+		vlTOPp->top_tv__DOT__mreq_n = vlTOPp->top_tv__DOT__topcore__DOT__i_tv80_core__DOT__iorq_i;
+	    }
+	}
+    } else {
+	vlTOPp->top_tv__DOT__mreq_n = 1U;
     }
     // ALWAYS at tv80_core/tv80_core.v:375
     if (vlTOPp->top_tv__DOT____Vcellinp__topcore__reset_n) {
@@ -17902,11 +17961,13 @@ VL_INLINE_OPT void Vtop_tv::_sequent__TOP__5(Vtop_tv__Syms* __restrict vlSymsp) 
 	    } else {
 		if (vlTOPp->top_tv__DOT__topcore__DOT__i_tv80_core__DOT__last_tstate) {
 		    if (vlTOPp->top_tv__DOT__topcore__DOT__i_tv80_core__DOT__Jump) {
-			vlTOPp->addr = ((0xffU & (IData)(vlTOPp->addr)) 
-					| ((IData)(vlTOPp->top_tv__DOT__topcore__DOT__di_reg) 
-					   << 8U));
-			vlTOPp->addr = ((0xff00U & (IData)(vlTOPp->addr)) 
-					| (0xffU & (IData)(vlTOPp->top_tv__DOT__topcore__DOT__i_tv80_core__DOT__TmpAddr)));
+			vlTOPp->top_tv__DOT__addr_raw 
+			    = ((0xffU & (IData)(vlTOPp->top_tv__DOT__addr_raw)) 
+			       | ((IData)(vlTOPp->top_tv__DOT__topcore__DOT__di_reg) 
+				  << 8U));
+			vlTOPp->top_tv__DOT__addr_raw 
+			    = ((0xff00U & (IData)(vlTOPp->top_tv__DOT__addr_raw)) 
+			       | (0xffU & (IData)(vlTOPp->top_tv__DOT__topcore__DOT__i_tv80_core__DOT__TmpAddr)));
 			vlTOPp->__Vdly__top_tv__DOT__topcore__DOT__i_tv80_core__DOT__PC 
 			    = ((0xffU & (IData)(vlTOPp->__Vdly__top_tv__DOT__topcore__DOT__i_tv80_core__DOT__PC)) 
 			       | ((IData)(vlTOPp->top_tv__DOT__topcore__DOT__di_reg) 
@@ -17916,32 +17977,34 @@ VL_INLINE_OPT void Vtop_tv::_sequent__TOP__5(Vtop_tv__Syms* __restrict vlSymsp) 
 			       | (0xffU & (IData)(vlTOPp->top_tv__DOT__topcore__DOT__i_tv80_core__DOT__TmpAddr)));
 		    } else {
 			if (vlTOPp->top_tv__DOT__topcore__DOT__i_tv80_core__DOT__JumpXY) {
-			    vlTOPp->addr = vlTOPp->top_tv__DOT__topcore__DOT__i_tv80_core__DOT__RegBusC;
+			    vlTOPp->top_tv__DOT__addr_raw 
+				= vlTOPp->top_tv__DOT__topcore__DOT__i_tv80_core__DOT__RegBusC;
 			    vlTOPp->__Vdly__top_tv__DOT__topcore__DOT__i_tv80_core__DOT__PC 
 				= vlTOPp->top_tv__DOT__topcore__DOT__i_tv80_core__DOT__RegBusC;
 			} else {
 			    if (((IData)(vlTOPp->top_tv__DOT__topcore__DOT__i_tv80_core__DOT__Call) 
 				 | (IData)(vlTOPp->top_tv__DOT__topcore__DOT__i_tv80_core__DOT__RstP))) {
-				vlTOPp->addr = vlTOPp->top_tv__DOT__topcore__DOT__i_tv80_core__DOT__TmpAddr;
+				vlTOPp->top_tv__DOT__addr_raw 
+				    = vlTOPp->top_tv__DOT__topcore__DOT__i_tv80_core__DOT__TmpAddr;
 				vlTOPp->__Vdly__top_tv__DOT__topcore__DOT__i_tv80_core__DOT__PC 
 				    = vlTOPp->top_tv__DOT__topcore__DOT__i_tv80_core__DOT__TmpAddr;
 			    } else {
 				if (((IData)(vlTOPp->top_tv__DOT__topcore__DOT__i_tv80_core__DOT__last_mcycle) 
 				     & (IData)(vlTOPp->top_tv__DOT__topcore__DOT__i_tv80_core__DOT__NMICycle))) {
-				    vlTOPp->addr = 0x66U;
+				    vlTOPp->top_tv__DOT__addr_raw = 0x66U;
 				    vlTOPp->__Vdly__top_tv__DOT__topcore__DOT__i_tv80_core__DOT__PC = 0x66U;
 				} else {
 				    if (((((IData)(vlTOPp->top_tv__DOT__topcore__DOT__i_tv80_core__DOT__mcycle) 
 					   >> 2U) & (IData)(vlTOPp->top_tv__DOT__topcore__DOT__i_tv80_core__DOT__IntCycle)) 
 					 & (2U == (IData)(vlTOPp->top_tv__DOT__topcore__DOT__i_tv80_core__DOT__IStatus)))) {
-					vlTOPp->addr 
+					vlTOPp->top_tv__DOT__addr_raw 
 					    = ((0xffU 
-						& (IData)(vlTOPp->addr)) 
+						& (IData)(vlTOPp->top_tv__DOT__addr_raw)) 
 					       | ((IData)(vlTOPp->top_tv__DOT__topcore__DOT__i_tv80_core__DOT__I) 
 						  << 8U));
-					vlTOPp->addr 
+					vlTOPp->top_tv__DOT__addr_raw 
 					    = ((0xff00U 
-						& (IData)(vlTOPp->addr)) 
+						& (IData)(vlTOPp->top_tv__DOT__addr_raw)) 
 					       | (0xffU 
 						  & (IData)(vlTOPp->top_tv__DOT__topcore__DOT__i_tv80_core__DOT__TmpAddr)));
 					vlTOPp->__Vdly__top_tv__DOT__topcore__DOT__i_tv80_core__DOT__PC 
@@ -17961,26 +18024,26 @@ VL_INLINE_OPT void Vtop_tv::_sequent__TOP__5(Vtop_tv__Syms* __restrict vlSymsp) 
 						if (
 						    (1U 
 						     & (IData)(vlTOPp->top_tv__DOT__topcore__DOT__i_tv80_core__DOT__Set_Addr_To))) {
-						    vlTOPp->addr 
+						    vlTOPp->top_tv__DOT__addr_raw 
 							= vlTOPp->top_tv__DOT__topcore__DOT__i_tv80_core__DOT__PC;
 						} else {
 						    if (vlTOPp->top_tv__DOT__topcore__DOT__i_tv80_core__DOT__Inc_WZ) {
-							vlTOPp->addr 
+							vlTOPp->top_tv__DOT__addr_raw 
 							    = 
 							    (0xffffU 
 							     & ((IData)(1U) 
 								+ (IData)(vlTOPp->top_tv__DOT__topcore__DOT__i_tv80_core__DOT__TmpAddr)));
 						    } else {
-							vlTOPp->addr 
+							vlTOPp->top_tv__DOT__addr_raw 
 							    = 
 							    ((0xffU 
-							      & (IData)(vlTOPp->addr)) 
+							      & (IData)(vlTOPp->top_tv__DOT__addr_raw)) 
 							     | ((IData)(vlTOPp->top_tv__DOT__topcore__DOT__di_reg) 
 								<< 8U));
-							vlTOPp->addr 
+							vlTOPp->top_tv__DOT__addr_raw 
 							    = 
 							    ((0xff00U 
-							      & (IData)(vlTOPp->addr)) 
+							      & (IData)(vlTOPp->top_tv__DOT__addr_raw)) 
 							     | (0xffU 
 								& (IData)(vlTOPp->top_tv__DOT__topcore__DOT__i_tv80_core__DOT__TmpAddr)));
 						    }
@@ -17989,24 +18052,24 @@ VL_INLINE_OPT void Vtop_tv::_sequent__TOP__5(Vtop_tv__Syms* __restrict vlSymsp) 
 						if (
 						    (1U 
 						     & (IData)(vlTOPp->top_tv__DOT__topcore__DOT__i_tv80_core__DOT__Set_Addr_To))) {
-						    vlTOPp->addr 
+						    vlTOPp->top_tv__DOT__addr_raw 
 							= vlTOPp->top_tv__DOT__topcore__DOT__i_tv80_core__DOT__SP;
 						} else {
-						    vlTOPp->addr 
+						    vlTOPp->top_tv__DOT__addr_raw 
 							= 
 							((0xffU 
-							  & (IData)(vlTOPp->addr)) 
+							  & (IData)(vlTOPp->top_tv__DOT__addr_raw)) 
 							 | ((IData)(vlTOPp->top_tv__DOT__topcore__DOT__i_tv80_core__DOT__ACC) 
 							    << 8U));
-						    vlTOPp->addr 
+						    vlTOPp->top_tv__DOT__addr_raw 
 							= 
 							((0xff00U 
-							  & (IData)(vlTOPp->addr)) 
+							  & (IData)(vlTOPp->top_tv__DOT__addr_raw)) 
 							 | (IData)(vlTOPp->top_tv__DOT__topcore__DOT__di_reg));
 						}
 					    }
 					} else {
-					    vlTOPp->addr 
+					    vlTOPp->top_tv__DOT__addr_raw 
 						= (
 						   (2U 
 						    & (IData)(vlTOPp->top_tv__DOT__topcore__DOT__i_tv80_core__DOT__Set_Addr_To))
@@ -18309,7 +18372,7 @@ VL_INLINE_OPT void Vtop_tv::_sequent__TOP__5(Vtop_tv__Syms* __restrict vlSymsp) 
     } else {
 	vlTOPp->__Vdly__top_tv__DOT__topcore__DOT__i_tv80_core__DOT__PC = 0U;
 	vlTOPp->__Vdly__top_tv__DOT__topcore__DOT__i_tv80_core__DOT__F = 0xffU;
-	vlTOPp->addr = 0U;
+	vlTOPp->top_tv__DOT__addr_raw = 0U;
 	vlTOPp->__Vdly__top_tv__DOT__topcore__DOT__i_tv80_core__DOT__TmpAddr = 0U;
 	vlTOPp->__Vdly__top_tv__DOT__topcore__DOT__i_tv80_core__DOT__IR = 0U;
 	vlTOPp->__Vdly__top_tv__DOT__topcore__DOT__i_tv80_core__DOT__XY_State = 0U;
@@ -18325,6 +18388,9 @@ VL_INLINE_OPT void Vtop_tv::_sequent__TOP__5(Vtop_tv__Syms* __restrict vlSymsp) 
 	= vlTOPp->__Vdly__top_tv__DOT__topcore__DOT__i_tv80_core__DOT__TmpAddr;
     vlTOPp->top_tv__DOT__topcore__DOT__i_tv80_core__DOT__XY_State 
 	= vlTOPp->__Vdly__top_tv__DOT__topcore__DOT__i_tv80_core__DOT__XY_State;
+    vlTOPp->addr = ((IData)(vlTOPp->top_tv__DOT__memory_reloc_enable)
+		     ? (0xc000U | (IData)(vlTOPp->top_tv__DOT__addr_raw))
+		     : (IData)(vlTOPp->top_tv__DOT__addr_raw));
     // ALWAYS at tv80_core/tv80_core.v:375
     if (vlTOPp->top_tv__DOT____Vcellinp__topcore__reset_n) {
 	if ((1U & (~ (IData)(vlTOPp->top_tv__DOT__topcore__DOT__i_tv80_core__DOT__BusAck)))) {
@@ -36344,6 +36410,10 @@ void Vtop_tv::_ctor_var_reset() {
     top_tv__DOT__mem_dout = VL_RAND_RESET_I(8);
     top_tv__DOT__mem_din = VL_RAND_RESET_I(8);
     top_tv__DOT__wr_n = VL_RAND_RESET_I(1);
+    top_tv__DOT__addr_raw = VL_RAND_RESET_I(16);
+    top_tv__DOT__memory_reloc_enable = VL_RAND_RESET_I(1);
+    top_tv__DOT__mreq_n = VL_RAND_RESET_I(1);
+    top_tv__DOT__iorq_n = VL_RAND_RESET_I(1);
     top_tv__DOT____Vcellinp__topcore__reset_n = VL_RAND_RESET_I(1);
     { int __Vi0=0; for (; __Vi0<65536; ++__Vi0) {
 	    top_tv__DOT__memory__DOT__memory[__Vi0] = VL_RAND_RESET_I(8);

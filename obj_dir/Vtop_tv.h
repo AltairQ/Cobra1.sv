@@ -33,6 +33,9 @@ VL_MODULE(Vtop_tv) {
 	VL_SIG8(top_tv__DOT__mem_dout,7,0);
 	VL_SIG8(top_tv__DOT__mem_din,7,0);
 	VL_SIG8(top_tv__DOT__wr_n,0,0);
+	VL_SIG8(top_tv__DOT__memory_reloc_enable,0,0);
+	VL_SIG8(top_tv__DOT__mreq_n,0,0);
+	VL_SIG8(top_tv__DOT__iorq_n,0,0);
 	VL_SIG8(top_tv__DOT__topcore__DOT__no_read,0,0);
 	VL_SIG8(top_tv__DOT__topcore__DOT__write,0,0);
 	VL_SIG8(top_tv__DOT__topcore__DOT__di_reg,7,0);
@@ -91,11 +94,11 @@ VL_MODULE(Vtop_tv) {
 	VL_SIG8(top_tv__DOT__topcore__DOT__i_tv80_core__DOT__tstates,2,0);
 	VL_SIG8(top_tv__DOT__topcore__DOT__i_tv80_core__DOT__IntCycle,0,0);
 	VL_SIG8(top_tv__DOT__topcore__DOT__i_tv80_core__DOT__NMICycle,0,0);
+    };
+    struct {
 	VL_SIG8(top_tv__DOT__topcore__DOT__i_tv80_core__DOT__Inc_PC,0,0);
 	VL_SIG8(top_tv__DOT__topcore__DOT__i_tv80_core__DOT__Inc_WZ,0,0);
 	VL_SIG8(top_tv__DOT__topcore__DOT__i_tv80_core__DOT__IncDec_16,3,0);
-    };
-    struct {
 	VL_SIG8(top_tv__DOT__topcore__DOT__i_tv80_core__DOT__Prefix,1,0);
 	VL_SIG8(top_tv__DOT__topcore__DOT__i_tv80_core__DOT__Read_To_Acc,0,0);
 	VL_SIG8(top_tv__DOT__topcore__DOT__i_tv80_core__DOT__Read_To_Reg,0,0);
@@ -146,6 +149,7 @@ VL_MODULE(Vtop_tv) {
 	VL_SIG8(top_tv__DOT__topcore__DOT__i_tv80_core__DOT__i_alu__DOT__Q_v,7,0);
 	VL_SIG8(top_tv__DOT__topcore__DOT__i_tv80_core__DOT__i_alu__DOT__BitMask,7,0);
 	VL_SIG8(top_tv__DOT__topcore__DOT__i_tv80_core__DOT__i_alu__DOT__Q_t,7,0);
+	VL_SIG16(top_tv__DOT__addr_raw,15,0);
 	VL_SIG16(top_tv__DOT__topcore__DOT__i_tv80_core__DOT__SP,15,0);
 	VL_SIG16(top_tv__DOT__topcore__DOT__i_tv80_core__DOT__PC,15,0);
 	VL_SIG16(top_tv__DOT__topcore__DOT__i_tv80_core__DOT__RegBusA,15,0);
@@ -156,12 +160,12 @@ VL_MODULE(Vtop_tv) {
 	VL_SIG16(top_tv__DOT__topcore__DOT__i_tv80_core__DOT__ID16,15,0);
 	VL_SIG16(top_tv__DOT__topcore__DOT__i_tv80_core__DOT__PC16,15,0);
 	VL_SIG16(top_tv__DOT__topcore__DOT__i_tv80_core__DOT__PC16_B,15,0);
+    };
+    struct {
 	VL_SIG16(top_tv__DOT__topcore__DOT__i_tv80_core__DOT__SP16,15,0);
 	VL_SIG16(top_tv__DOT__topcore__DOT__i_tv80_core__DOT__SP16_A,15,0);
 	VL_SIG16(top_tv__DOT__topcore__DOT__i_tv80_core__DOT__SP16_B,15,0);
 	VL_SIG16(top_tv__DOT__topcore__DOT__i_tv80_core__DOT__ID16_B,15,0);
-    };
-    struct {
 	VL_SIG16(top_tv__DOT__topcore__DOT__i_tv80_core__DOT__i_alu__DOT__DAA_Q,8,0);
 	VL_SIG(top_tv__DOT__memory__DOT__i,31,0);
 	VL_SIG8(top_tv__DOT__memory__DOT__memory[65536],7,0);
