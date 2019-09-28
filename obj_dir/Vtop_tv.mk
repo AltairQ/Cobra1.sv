@@ -11,16 +11,22 @@ default: Vtop_tv
 PERL = perl
 # Path to Verilator kit (from $VERILATOR_ROOT)
 VERILATOR_ROOT = /usr/share/verilator
+# Path to SystemPerl kit top (from $SYSTEMPERL)
+SYSTEMPERL = 
+# Path to SystemPerl kit includes (from $SYSTEMPERL_INCLUDE)
+SYSTEMPERL_INCLUDE = 
 # SystemC include directory with systemc.h (from $SYSTEMC_INCLUDE)
 SYSTEMC_INCLUDE ?= 
 # SystemC library directory with libsystemc.a (from $SYSTEMC_LIBDIR)
 SYSTEMC_LIBDIR ?= 
 
 ### Switches...
+# SystemPerl output mode?  0/1 (from --sp)
+VM_SP = 0
 # SystemC output mode?  0/1 (from --sc)
 VM_SC = 0
-# Legacy or SystemC output mode?  0/1 (from --sc)
-VM_SP_OR_SC = $(VM_SC)
+# SystemPerl or SystemC output mode?  0/1 (from --sp/--sc)
+VM_SP_OR_SC = 0
 # Deprecated
 VM_PCLI = 1
 # Deprecated: SystemC architecture to find link library path (from $SYSTEMC_ARCH)
@@ -56,11 +62,11 @@ include $(VERILATOR_ROOT)/include/verilated.mk
 VPATH += $(VM_USER_DIR)
 
 sim_main.o: sim_main.cpp
-	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
+	$(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
 
 ### Link rules... (from --exe)
 Vtop_tv: $(VK_USER_OBJS) $(VK_GLOBAL_OBJS) $(VM_PREFIX)__ALL.a
-	$(LINK) $(LDFLAGS) $^ $(LOADLIBES) $(LDLIBS) -o $@ $(LIBS) $(SC_LIBS)
+	$(LINK) $(LDFLAGS) $^ $(LOADLIBES) $(LDLIBS) -o $@ $(LIBS) $(SC_LIBS) 2>&1 | c++filt
 
 
 # Verilated -*- Makefile -*-

@@ -1,3 +1,6 @@
+`define ROM_HEX  rom_hex_file()
+import "DPI-C" function string rom_hex_file();
+
 module mem_module (
 	input clk, // clock
 	input [15:0] addr, // mem address (8bit words)
@@ -17,8 +20,10 @@ module mem_module (
 		for(i = 0; i <= 65535; i++)
 			memory[i] = 0;
 
-
-		$readmemh("cobra_rom.hex", memory, 49152);
+		// Load ROM @ 0xC000
+		`ifdef ROM_HEX
+			$readmemh(`ROM_HEX, memory, 49152);
+		`endif
 	end
 
 	assign data_out = memory[addr];

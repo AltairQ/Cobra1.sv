@@ -1,0 +1,1 @@
+cd "tests" && z80asm "$1.s" && xxd -ps a.bin | grep -o .. | xargs > "$1.hex" && rm a.bin

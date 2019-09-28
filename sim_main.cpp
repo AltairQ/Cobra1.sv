@@ -3,48 +3,70 @@
 #include <iostream>
 #include <cstdio>
 
+// This is to provide a runtime param in mem_module.sv
+static std::string rom_hex;
+extern "C" const char* rom_hex_file()
+{
+	return rom_hex.c_str();
+}
+
 int main(int argc, char** argv, char** env) {
 	Verilated::commandArgs(argc, argv);
 
+	// Read the rom hex file path
+	const char* str;
+	str = Verilated::commandArgsPlusMatch("rom_file=");
+	if(str && str[0]) rom_hex = str + 10;
+
 
 	Vtop_tv* top = new Vtop_tv();
-
-	top->reset = 0;
-
-	int mem_start = 0xc000;
-	int last_tick = 40000;
+	int last_tick = 3*100000;
 
 
 	int cnt = 0; 
 	uint8_t clk = 0;
 
 	while (!Verilated::gotFinish() && cnt < last_tick) {
-
-		// let's give it a couple of cycles to reset
-		// I believe Z80's manual specifies 5 cycles
-		// This is probably unnecessary here but oh well
-		top->reset = cnt < 5 ? 1 : 0;
+		// Let's give it a couple of cycles to reset
+		// I believe Z80 manual specifies 5 cycles
+		// Probably one cycle is necessary in this model
+		top->reset = cnt < 2 ? 1 : 0;
 
 		// Tick
 		top->clk = 0;
-	 	top->eval();
+		top->eval();
 		top->clk = 1;
-	 	top->eval();
+		top->eval();
 
 	 	// sanity check
-	 	if(cnt % 100 == 1)
-	 		printf("> ADDR = %04X", top->addr);
+		if(0)
+			printf("> ADDR = %04X\n", top->addr, top->top_tv__DOT__memory_reloc_enable);
 
-	 	cnt += 1;
+		cnt += 1;
 
-	 	// memory sanity check
+	 	// Writing 0xaa to 0xc888 triggers success, used for testing
+		if(top->addr == 0xc888 &&
+			top->top_tv__DOT__cpu_dout == 0xaa &&
+			(1 & top->top_tv__DOT__wr_n) == 0)
+		{
+			printf("Success! (address triggered)\n");
+			return 0;
+		}
+
+		// Print out the VRAM at the end
 	 	if(cnt == last_tick)
 	 	{
-	 		puts("\n\n");
-	 		for(int i = 0xf800; i <= 0xffff; i++)
-	 			printf("%02X", top->top_tv__DOT__memory__DOT__memory[i]);
+	 		// UNIX clear screen (?)
+	 		printf("\e[1;1H\e[2J");
+	 		for(int i = 0xf800; i <= 0xfb00; i++)
+	 		{
+	 			printf("%c", (char)top->top_tv__DOT__memory__DOT__memory[i]);
+	 			if(i % 32 == 0) puts("");
+	 		}
 	 	}
 	}
+	
 	delete top;
-	exit(0);
+	std::cout << "Timeout" << std::endl;
+	return 0;
 }
