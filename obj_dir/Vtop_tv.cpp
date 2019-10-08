@@ -1187,6 +1187,30 @@ void Vtop_tv::_settle__TOP__5(Vtop_tv__Syms* __restrict vlSymsp) {
 	[vlTOPp->top_tv__DOT__topcore__DOT__i_tv80_core__DOT__RegAddrC];
     vlTOPp->top_tv__DOT__mem_dout = vlTOPp->top_tv__DOT__memory__DOT__memory
 	[vlTOPp->addr];
+    vlTOPp->top_tv__DOT__kb__DOT__rows = ((0x80U & 
+					   ((IData)(vlTOPp->addr) 
+					    >> 5U)) 
+					  | ((0x40U 
+					      & ((IData)(vlTOPp->addr) 
+						 >> 7U)) 
+					     | ((0x20U 
+						 & ((IData)(vlTOPp->addr) 
+						    >> 9U)) 
+						| ((0x10U 
+						    & ((IData)(vlTOPp->addr) 
+						       >> 0xbU)) 
+						   | ((8U 
+						       & ((IData)(vlTOPp->addr) 
+							  >> 5U)) 
+						      | ((4U 
+							  & ((IData)(vlTOPp->addr) 
+							     >> 7U)) 
+							 | ((2U 
+							     & ((IData)(vlTOPp->addr) 
+								>> 9U)) 
+							    | (1U 
+							       & ((IData)(vlTOPp->addr) 
+								  >> 0xbU)))))))));
     vlTOPp->top_tv__DOT__topcore__DOT__i_tv80_core__DOT__RegBusC 
 	= ((0xffU & (IData)(vlTOPp->top_tv__DOT__topcore__DOT__i_tv80_core__DOT__RegBusC)) 
 	   | ((IData)(vlTOPp->top_tv__DOT__topcore__DOT__i_tv80_core__DOT____Vcellout__i_reg__DOCH) 
@@ -1220,6 +1244,30 @@ VL_INLINE_OPT void Vtop_tv::_sequent__TOP__6(Vtop_tv__Syms* __restrict vlSymsp) 
 	= vlTOPp->__Vdly__top_tv__DOT__topcore__DOT__i_tv80_core__DOT__Alternate;
     vlTOPp->top_tv__DOT__mem_dout = vlTOPp->top_tv__DOT__memory__DOT__memory
 	[vlTOPp->addr];
+    vlTOPp->top_tv__DOT__kb__DOT__rows = ((0x80U & 
+					   ((IData)(vlTOPp->addr) 
+					    >> 5U)) 
+					  | ((0x40U 
+					      & ((IData)(vlTOPp->addr) 
+						 >> 7U)) 
+					     | ((0x20U 
+						 & ((IData)(vlTOPp->addr) 
+						    >> 9U)) 
+						| ((0x10U 
+						    & ((IData)(vlTOPp->addr) 
+						       >> 0xbU)) 
+						   | ((8U 
+						       & ((IData)(vlTOPp->addr) 
+							  >> 5U)) 
+						      | ((4U 
+							  & ((IData)(vlTOPp->addr) 
+							     >> 7U)) 
+							 | ((2U 
+							     & ((IData)(vlTOPp->addr) 
+								>> 9U)) 
+							    | (1U 
+							       & ((IData)(vlTOPp->addr) 
+								  >> 0xbU)))))))));
     // ALWAYS at tv80_core/tv80_alu.v:109
     vlTOPp->top_tv__DOT__topcore__DOT__i_tv80_core__DOT__i_alu__DOT__UseCarry 
 	= (1U & ((~ ((IData)(vlTOPp->top_tv__DOT__topcore__DOT__i_tv80_core__DOT__ALU_Op_r) 
@@ -1394,8 +1442,6 @@ VL_INLINE_OPT void Vtop_tv::_sequent__TOP__6(Vtop_tv__Syms* __restrict vlSymsp) 
 	= vlTOPp->__Vdly__top_tv__DOT__topcore__DOT__i_tv80_core__DOT__IntCycle;
     vlTOPp->top_tv__DOT__topcore__DOT__i_tv80_core__DOT__mcycle 
 	= vlTOPp->__Vdly__top_tv__DOT__topcore__DOT__i_tv80_core__DOT__mcycle;
-    vlTOPp->top_tv__DOT__cpu_din = ((IData)(vlTOPp->top_tv__DOT__mreq_n)
-				     ? 0xffU : (IData)(vlTOPp->top_tv__DOT__mem_dout));
     // ALWAYS at tv80_core/tv80_core.v:326
     vlTOPp->top_tv__DOT__topcore__DOT__i_tv80_core__DOT__last_mcycle 
 	= (1U & ((1U == (IData)(vlTOPp->top_tv__DOT__topcore__DOT__i_tv80_core__DOT__mcycles))
@@ -9452,10 +9498,267 @@ void Vtop_tv::_settle__TOP__8(Vtop_tv__Syms* __restrict vlSymsp) {
     vlTOPp->top_tv__DOT__topcore__DOT__i_tv80_core__DOT__i_alu__DOT__OverFlow_v 
 	= ((IData)(vlTOPp->top_tv__DOT__topcore__DOT__i_tv80_core__DOT__i_alu__DOT__Carry_v) 
 	   ^ (IData)(vlTOPp->top_tv__DOT__topcore__DOT__i_tv80_core__DOT__i_alu__DOT__Carry7_v));
+    vlTOPp->top_tv__DOT__kb__DOT__cols = ((0x1eU & (IData)(vlTOPp->top_tv__DOT__kb__DOT__cols)) 
+					  | (1U & (
+						   ((((((((IData)(vlTOPp->top_tv__DOT__kb__DOT__rows) 
+							  | (~ (IData)(vlTOPp->kb_state))) 
+							 & (((IData)(vlTOPp->top_tv__DOT__kb__DOT__rows) 
+							     >> 1U) 
+							    | (~ (IData)(
+									 (vlTOPp->kb_state 
+									  >> 5U))))) 
+							& (((IData)(vlTOPp->top_tv__DOT__kb__DOT__rows) 
+							    >> 2U) 
+							   | (~ (IData)(
+									(vlTOPp->kb_state 
+									 >> 0xaU))))) 
+						       & (((IData)(vlTOPp->top_tv__DOT__kb__DOT__rows) 
+							   >> 3U) 
+							  | (~ (IData)(
+								       (vlTOPp->kb_state 
+									>> 0xfU))))) 
+						      & (((IData)(vlTOPp->top_tv__DOT__kb__DOT__rows) 
+							  >> 4U) 
+							 | (~ (IData)(
+								      (vlTOPp->kb_state 
+								       >> 0x14U))))) 
+						     & (((IData)(vlTOPp->top_tv__DOT__kb__DOT__rows) 
+							 >> 5U) 
+							| (~ (IData)(
+								     (vlTOPp->kb_state 
+								      >> 0x19U))))) 
+						    & (((IData)(vlTOPp->top_tv__DOT__kb__DOT__rows) 
+							>> 6U) 
+						       | (~ (IData)(
+								    (vlTOPp->kb_state 
+								     >> 0x1eU))))) 
+						   & (((IData)(vlTOPp->top_tv__DOT__kb__DOT__rows) 
+						       >> 7U) 
+						      | (~ (IData)(
+								   (vlTOPp->kb_state 
+								    >> 0x23U)))))));
+    vlTOPp->top_tv__DOT__kb__DOT__cols = ((0x1dU & (IData)(vlTOPp->top_tv__DOT__kb__DOT__cols)) 
+					  | (2U & (
+						   (((((((((IData)(vlTOPp->top_tv__DOT__kb__DOT__rows) 
+							   | (~ (IData)(
+									(vlTOPp->kb_state 
+									 >> 1U)))) 
+							  << 1U) 
+							 & ((0xfffffffeU 
+							     & (IData)(vlTOPp->top_tv__DOT__kb__DOT__rows)) 
+							    | ((~ (IData)(
+									  (vlTOPp->kb_state 
+									   >> 6U))) 
+							       << 1U))) 
+							& ((0x7ffffffeU 
+							    & ((IData)(vlTOPp->top_tv__DOT__kb__DOT__rows) 
+							       >> 1U)) 
+							   | ((~ (IData)(
+									 (vlTOPp->kb_state 
+									  >> 0xbU))) 
+							      << 1U))) 
+						       & ((0x3ffffffeU 
+							   & ((IData)(vlTOPp->top_tv__DOT__kb__DOT__rows) 
+							      >> 2U)) 
+							  | ((~ (IData)(
+									(vlTOPp->kb_state 
+									 >> 0x10U))) 
+							     << 1U))) 
+						      & ((0x1ffffffeU 
+							  & ((IData)(vlTOPp->top_tv__DOT__kb__DOT__rows) 
+							     >> 3U)) 
+							 | ((~ (IData)(
+								       (vlTOPp->kb_state 
+									>> 0x15U))) 
+							    << 1U))) 
+						     & ((0xffffffeU 
+							 & ((IData)(vlTOPp->top_tv__DOT__kb__DOT__rows) 
+							    >> 4U)) 
+							| ((~ (IData)(
+								      (vlTOPp->kb_state 
+								       >> 0x1aU))) 
+							   << 1U))) 
+						    & ((0x7fffffeU 
+							& ((IData)(vlTOPp->top_tv__DOT__kb__DOT__rows) 
+							   >> 5U)) 
+						       | ((~ (IData)(
+								     (vlTOPp->kb_state 
+								      >> 0x1fU))) 
+							  << 1U))) 
+						   & ((0x3fffffeU 
+						       & ((IData)(vlTOPp->top_tv__DOT__kb__DOT__rows) 
+							  >> 6U)) 
+						      | ((~ (IData)(
+								    (vlTOPp->kb_state 
+								     >> 0x24U))) 
+							 << 1U)))));
+    vlTOPp->top_tv__DOT__kb__DOT__cols = ((0x1bU & (IData)(vlTOPp->top_tv__DOT__kb__DOT__cols)) 
+					  | (4U & (
+						   (((((((((IData)(vlTOPp->top_tv__DOT__kb__DOT__rows) 
+							   | (~ (IData)(
+									(vlTOPp->kb_state 
+									 >> 2U)))) 
+							  << 2U) 
+							 & ((0xfffffffcU 
+							     & ((IData)(vlTOPp->top_tv__DOT__kb__DOT__rows) 
+								<< 1U)) 
+							    | ((~ (IData)(
+									  (vlTOPp->kb_state 
+									   >> 7U))) 
+							       << 2U))) 
+							& ((0xfffffffcU 
+							    & (IData)(vlTOPp->top_tv__DOT__kb__DOT__rows)) 
+							   | ((~ (IData)(
+									 (vlTOPp->kb_state 
+									  >> 0xcU))) 
+							      << 2U))) 
+						       & ((0x7ffffffcU 
+							   & ((IData)(vlTOPp->top_tv__DOT__kb__DOT__rows) 
+							      >> 1U)) 
+							  | ((~ (IData)(
+									(vlTOPp->kb_state 
+									 >> 0x11U))) 
+							     << 2U))) 
+						      & ((0x3ffffffcU 
+							  & ((IData)(vlTOPp->top_tv__DOT__kb__DOT__rows) 
+							     >> 2U)) 
+							 | ((~ (IData)(
+								       (vlTOPp->kb_state 
+									>> 0x16U))) 
+							    << 2U))) 
+						     & ((0x1ffffffcU 
+							 & ((IData)(vlTOPp->top_tv__DOT__kb__DOT__rows) 
+							    >> 3U)) 
+							| ((~ (IData)(
+								      (vlTOPp->kb_state 
+								       >> 0x1bU))) 
+							   << 2U))) 
+						    & ((0xffffffcU 
+							& ((IData)(vlTOPp->top_tv__DOT__kb__DOT__rows) 
+							   >> 4U)) 
+						       | ((~ (IData)(
+								     (vlTOPp->kb_state 
+								      >> 0x20U))) 
+							  << 2U))) 
+						   & ((0x7fffffcU 
+						       & ((IData)(vlTOPp->top_tv__DOT__kb__DOT__rows) 
+							  >> 5U)) 
+						      | ((~ (IData)(
+								    (vlTOPp->kb_state 
+								     >> 0x25U))) 
+							 << 2U)))));
+    vlTOPp->top_tv__DOT__kb__DOT__cols = ((0x17U & (IData)(vlTOPp->top_tv__DOT__kb__DOT__cols)) 
+					  | (8U & (
+						   (((((((((IData)(vlTOPp->top_tv__DOT__kb__DOT__rows) 
+							   | (~ (IData)(
+									(vlTOPp->kb_state 
+									 >> 3U)))) 
+							  << 3U) 
+							 & ((0xfffffff8U 
+							     & ((IData)(vlTOPp->top_tv__DOT__kb__DOT__rows) 
+								<< 2U)) 
+							    | ((~ (IData)(
+									  (vlTOPp->kb_state 
+									   >> 8U))) 
+							       << 3U))) 
+							& ((0xfffffff8U 
+							    & ((IData)(vlTOPp->top_tv__DOT__kb__DOT__rows) 
+							       << 1U)) 
+							   | ((~ (IData)(
+									 (vlTOPp->kb_state 
+									  >> 0xdU))) 
+							      << 3U))) 
+						       & ((0xfffffff8U 
+							   & (IData)(vlTOPp->top_tv__DOT__kb__DOT__rows)) 
+							  | ((~ (IData)(
+									(vlTOPp->kb_state 
+									 >> 0x12U))) 
+							     << 3U))) 
+						      & ((0x7ffffff8U 
+							  & ((IData)(vlTOPp->top_tv__DOT__kb__DOT__rows) 
+							     >> 1U)) 
+							 | ((~ (IData)(
+								       (vlTOPp->kb_state 
+									>> 0x17U))) 
+							    << 3U))) 
+						     & ((0x3ffffff8U 
+							 & ((IData)(vlTOPp->top_tv__DOT__kb__DOT__rows) 
+							    >> 2U)) 
+							| ((~ (IData)(
+								      (vlTOPp->kb_state 
+								       >> 0x1cU))) 
+							   << 3U))) 
+						    & ((0x1ffffff8U 
+							& ((IData)(vlTOPp->top_tv__DOT__kb__DOT__rows) 
+							   >> 3U)) 
+						       | ((~ (IData)(
+								     (vlTOPp->kb_state 
+								      >> 0x21U))) 
+							  << 3U))) 
+						   & ((0xffffff8U 
+						       & ((IData)(vlTOPp->top_tv__DOT__kb__DOT__rows) 
+							  >> 4U)) 
+						      | ((~ (IData)(
+								    (vlTOPp->kb_state 
+								     >> 0x26U))) 
+							 << 3U)))));
+    vlTOPp->top_tv__DOT__kb__DOT__cols = ((0xfU & (IData)(vlTOPp->top_tv__DOT__kb__DOT__cols)) 
+					  | (0x10U 
+					     & ((((((((((IData)(vlTOPp->top_tv__DOT__kb__DOT__rows) 
+							| (~ (IData)(
+								     (vlTOPp->kb_state 
+								      >> 4U)))) 
+						       << 4U) 
+						      & ((0xfffffff0U 
+							  & ((IData)(vlTOPp->top_tv__DOT__kb__DOT__rows) 
+							     << 3U)) 
+							 | ((~ (IData)(
+								       (vlTOPp->kb_state 
+									>> 9U))) 
+							    << 4U))) 
+						     & ((0xfffffff0U 
+							 & ((IData)(vlTOPp->top_tv__DOT__kb__DOT__rows) 
+							    << 2U)) 
+							| ((~ (IData)(
+								      (vlTOPp->kb_state 
+								       >> 0xeU))) 
+							   << 4U))) 
+						    & ((0xfffffff0U 
+							& ((IData)(vlTOPp->top_tv__DOT__kb__DOT__rows) 
+							   << 1U)) 
+						       | ((~ (IData)(
+								     (vlTOPp->kb_state 
+								      >> 0x13U))) 
+							  << 4U))) 
+						   & ((0xfffffff0U 
+						       & (IData)(vlTOPp->top_tv__DOT__kb__DOT__rows)) 
+						      | ((~ (IData)(
+								    (vlTOPp->kb_state 
+								     >> 0x18U))) 
+							 << 4U))) 
+						  & ((0x7ffffff0U 
+						      & ((IData)(vlTOPp->top_tv__DOT__kb__DOT__rows) 
+							 >> 1U)) 
+						     | ((~ (IData)(
+								   (vlTOPp->kb_state 
+								    >> 0x1dU))) 
+							<< 4U))) 
+						 & ((0x3ffffff0U 
+						     & ((IData)(vlTOPp->top_tv__DOT__kb__DOT__rows) 
+							>> 2U)) 
+						    | ((~ (IData)(
+								  (vlTOPp->kb_state 
+								   >> 0x22U))) 
+						       << 4U))) 
+						& ((0x1ffffff0U 
+						    & ((IData)(vlTOPp->top_tv__DOT__kb__DOT__rows) 
+						       >> 3U)) 
+						   | ((~ (IData)(
+								 (vlTOPp->kb_state 
+								  >> 0x27U))) 
+						      << 4U)))));
     vlTOPp->top_tv__DOT____Vcellinp__topcore__reset_n 
 	= (1U & (~ (IData)(vlTOPp->reset)));
-    vlTOPp->top_tv__DOT__cpu_din = ((IData)(vlTOPp->top_tv__DOT__mreq_n)
-				     ? 0xffU : (IData)(vlTOPp->top_tv__DOT__mem_dout));
     // ALWAYS at tv80_core/tv80_core.v:326
     vlTOPp->top_tv__DOT__topcore__DOT__i_tv80_core__DOT__last_mcycle 
 	= (1U & ((1U == (IData)(vlTOPp->top_tv__DOT__topcore__DOT__i_tv80_core__DOT__mcycles))
@@ -17994,8 +18297,270 @@ VL_INLINE_OPT void Vtop_tv::_combo__TOP__9(Vtop_tv__Syms* __restrict vlSymsp) {
     VL_DEBUG_IF(VL_PRINTF("    Vtop_tv::_combo__TOP__9\n"); );
     Vtop_tv* __restrict vlTOPp VL_ATTR_UNUSED = vlSymsp->TOPp;
     // Body
+    vlTOPp->top_tv__DOT__kb__DOT__cols = ((0x1eU & (IData)(vlTOPp->top_tv__DOT__kb__DOT__cols)) 
+					  | (1U & (
+						   ((((((((IData)(vlTOPp->top_tv__DOT__kb__DOT__rows) 
+							  | (~ (IData)(vlTOPp->kb_state))) 
+							 & (((IData)(vlTOPp->top_tv__DOT__kb__DOT__rows) 
+							     >> 1U) 
+							    | (~ (IData)(
+									 (vlTOPp->kb_state 
+									  >> 5U))))) 
+							& (((IData)(vlTOPp->top_tv__DOT__kb__DOT__rows) 
+							    >> 2U) 
+							   | (~ (IData)(
+									(vlTOPp->kb_state 
+									 >> 0xaU))))) 
+						       & (((IData)(vlTOPp->top_tv__DOT__kb__DOT__rows) 
+							   >> 3U) 
+							  | (~ (IData)(
+								       (vlTOPp->kb_state 
+									>> 0xfU))))) 
+						      & (((IData)(vlTOPp->top_tv__DOT__kb__DOT__rows) 
+							  >> 4U) 
+							 | (~ (IData)(
+								      (vlTOPp->kb_state 
+								       >> 0x14U))))) 
+						     & (((IData)(vlTOPp->top_tv__DOT__kb__DOT__rows) 
+							 >> 5U) 
+							| (~ (IData)(
+								     (vlTOPp->kb_state 
+								      >> 0x19U))))) 
+						    & (((IData)(vlTOPp->top_tv__DOT__kb__DOT__rows) 
+							>> 6U) 
+						       | (~ (IData)(
+								    (vlTOPp->kb_state 
+								     >> 0x1eU))))) 
+						   & (((IData)(vlTOPp->top_tv__DOT__kb__DOT__rows) 
+						       >> 7U) 
+						      | (~ (IData)(
+								   (vlTOPp->kb_state 
+								    >> 0x23U)))))));
+    vlTOPp->top_tv__DOT__kb__DOT__cols = ((0x1dU & (IData)(vlTOPp->top_tv__DOT__kb__DOT__cols)) 
+					  | (2U & (
+						   (((((((((IData)(vlTOPp->top_tv__DOT__kb__DOT__rows) 
+							   | (~ (IData)(
+									(vlTOPp->kb_state 
+									 >> 1U)))) 
+							  << 1U) 
+							 & ((0xfffffffeU 
+							     & (IData)(vlTOPp->top_tv__DOT__kb__DOT__rows)) 
+							    | ((~ (IData)(
+									  (vlTOPp->kb_state 
+									   >> 6U))) 
+							       << 1U))) 
+							& ((0x7ffffffeU 
+							    & ((IData)(vlTOPp->top_tv__DOT__kb__DOT__rows) 
+							       >> 1U)) 
+							   | ((~ (IData)(
+									 (vlTOPp->kb_state 
+									  >> 0xbU))) 
+							      << 1U))) 
+						       & ((0x3ffffffeU 
+							   & ((IData)(vlTOPp->top_tv__DOT__kb__DOT__rows) 
+							      >> 2U)) 
+							  | ((~ (IData)(
+									(vlTOPp->kb_state 
+									 >> 0x10U))) 
+							     << 1U))) 
+						      & ((0x1ffffffeU 
+							  & ((IData)(vlTOPp->top_tv__DOT__kb__DOT__rows) 
+							     >> 3U)) 
+							 | ((~ (IData)(
+								       (vlTOPp->kb_state 
+									>> 0x15U))) 
+							    << 1U))) 
+						     & ((0xffffffeU 
+							 & ((IData)(vlTOPp->top_tv__DOT__kb__DOT__rows) 
+							    >> 4U)) 
+							| ((~ (IData)(
+								      (vlTOPp->kb_state 
+								       >> 0x1aU))) 
+							   << 1U))) 
+						    & ((0x7fffffeU 
+							& ((IData)(vlTOPp->top_tv__DOT__kb__DOT__rows) 
+							   >> 5U)) 
+						       | ((~ (IData)(
+								     (vlTOPp->kb_state 
+								      >> 0x1fU))) 
+							  << 1U))) 
+						   & ((0x3fffffeU 
+						       & ((IData)(vlTOPp->top_tv__DOT__kb__DOT__rows) 
+							  >> 6U)) 
+						      | ((~ (IData)(
+								    (vlTOPp->kb_state 
+								     >> 0x24U))) 
+							 << 1U)))));
+    vlTOPp->top_tv__DOT__kb__DOT__cols = ((0x1bU & (IData)(vlTOPp->top_tv__DOT__kb__DOT__cols)) 
+					  | (4U & (
+						   (((((((((IData)(vlTOPp->top_tv__DOT__kb__DOT__rows) 
+							   | (~ (IData)(
+									(vlTOPp->kb_state 
+									 >> 2U)))) 
+							  << 2U) 
+							 & ((0xfffffffcU 
+							     & ((IData)(vlTOPp->top_tv__DOT__kb__DOT__rows) 
+								<< 1U)) 
+							    | ((~ (IData)(
+									  (vlTOPp->kb_state 
+									   >> 7U))) 
+							       << 2U))) 
+							& ((0xfffffffcU 
+							    & (IData)(vlTOPp->top_tv__DOT__kb__DOT__rows)) 
+							   | ((~ (IData)(
+									 (vlTOPp->kb_state 
+									  >> 0xcU))) 
+							      << 2U))) 
+						       & ((0x7ffffffcU 
+							   & ((IData)(vlTOPp->top_tv__DOT__kb__DOT__rows) 
+							      >> 1U)) 
+							  | ((~ (IData)(
+									(vlTOPp->kb_state 
+									 >> 0x11U))) 
+							     << 2U))) 
+						      & ((0x3ffffffcU 
+							  & ((IData)(vlTOPp->top_tv__DOT__kb__DOT__rows) 
+							     >> 2U)) 
+							 | ((~ (IData)(
+								       (vlTOPp->kb_state 
+									>> 0x16U))) 
+							    << 2U))) 
+						     & ((0x1ffffffcU 
+							 & ((IData)(vlTOPp->top_tv__DOT__kb__DOT__rows) 
+							    >> 3U)) 
+							| ((~ (IData)(
+								      (vlTOPp->kb_state 
+								       >> 0x1bU))) 
+							   << 2U))) 
+						    & ((0xffffffcU 
+							& ((IData)(vlTOPp->top_tv__DOT__kb__DOT__rows) 
+							   >> 4U)) 
+						       | ((~ (IData)(
+								     (vlTOPp->kb_state 
+								      >> 0x20U))) 
+							  << 2U))) 
+						   & ((0x7fffffcU 
+						       & ((IData)(vlTOPp->top_tv__DOT__kb__DOT__rows) 
+							  >> 5U)) 
+						      | ((~ (IData)(
+								    (vlTOPp->kb_state 
+								     >> 0x25U))) 
+							 << 2U)))));
+    vlTOPp->top_tv__DOT__kb__DOT__cols = ((0x17U & (IData)(vlTOPp->top_tv__DOT__kb__DOT__cols)) 
+					  | (8U & (
+						   (((((((((IData)(vlTOPp->top_tv__DOT__kb__DOT__rows) 
+							   | (~ (IData)(
+									(vlTOPp->kb_state 
+									 >> 3U)))) 
+							  << 3U) 
+							 & ((0xfffffff8U 
+							     & ((IData)(vlTOPp->top_tv__DOT__kb__DOT__rows) 
+								<< 2U)) 
+							    | ((~ (IData)(
+									  (vlTOPp->kb_state 
+									   >> 8U))) 
+							       << 3U))) 
+							& ((0xfffffff8U 
+							    & ((IData)(vlTOPp->top_tv__DOT__kb__DOT__rows) 
+							       << 1U)) 
+							   | ((~ (IData)(
+									 (vlTOPp->kb_state 
+									  >> 0xdU))) 
+							      << 3U))) 
+						       & ((0xfffffff8U 
+							   & (IData)(vlTOPp->top_tv__DOT__kb__DOT__rows)) 
+							  | ((~ (IData)(
+									(vlTOPp->kb_state 
+									 >> 0x12U))) 
+							     << 3U))) 
+						      & ((0x7ffffff8U 
+							  & ((IData)(vlTOPp->top_tv__DOT__kb__DOT__rows) 
+							     >> 1U)) 
+							 | ((~ (IData)(
+								       (vlTOPp->kb_state 
+									>> 0x17U))) 
+							    << 3U))) 
+						     & ((0x3ffffff8U 
+							 & ((IData)(vlTOPp->top_tv__DOT__kb__DOT__rows) 
+							    >> 2U)) 
+							| ((~ (IData)(
+								      (vlTOPp->kb_state 
+								       >> 0x1cU))) 
+							   << 3U))) 
+						    & ((0x1ffffff8U 
+							& ((IData)(vlTOPp->top_tv__DOT__kb__DOT__rows) 
+							   >> 3U)) 
+						       | ((~ (IData)(
+								     (vlTOPp->kb_state 
+								      >> 0x21U))) 
+							  << 3U))) 
+						   & ((0xffffff8U 
+						       & ((IData)(vlTOPp->top_tv__DOT__kb__DOT__rows) 
+							  >> 4U)) 
+						      | ((~ (IData)(
+								    (vlTOPp->kb_state 
+								     >> 0x26U))) 
+							 << 3U)))));
+    vlTOPp->top_tv__DOT__kb__DOT__cols = ((0xfU & (IData)(vlTOPp->top_tv__DOT__kb__DOT__cols)) 
+					  | (0x10U 
+					     & ((((((((((IData)(vlTOPp->top_tv__DOT__kb__DOT__rows) 
+							| (~ (IData)(
+								     (vlTOPp->kb_state 
+								      >> 4U)))) 
+						       << 4U) 
+						      & ((0xfffffff0U 
+							  & ((IData)(vlTOPp->top_tv__DOT__kb__DOT__rows) 
+							     << 3U)) 
+							 | ((~ (IData)(
+								       (vlTOPp->kb_state 
+									>> 9U))) 
+							    << 4U))) 
+						     & ((0xfffffff0U 
+							 & ((IData)(vlTOPp->top_tv__DOT__kb__DOT__rows) 
+							    << 2U)) 
+							| ((~ (IData)(
+								      (vlTOPp->kb_state 
+								       >> 0xeU))) 
+							   << 4U))) 
+						    & ((0xfffffff0U 
+							& ((IData)(vlTOPp->top_tv__DOT__kb__DOT__rows) 
+							   << 1U)) 
+						       | ((~ (IData)(
+								     (vlTOPp->kb_state 
+								      >> 0x13U))) 
+							  << 4U))) 
+						   & ((0xfffffff0U 
+						       & (IData)(vlTOPp->top_tv__DOT__kb__DOT__rows)) 
+						      | ((~ (IData)(
+								    (vlTOPp->kb_state 
+								     >> 0x18U))) 
+							 << 4U))) 
+						  & ((0x7ffffff0U 
+						      & ((IData)(vlTOPp->top_tv__DOT__kb__DOT__rows) 
+							 >> 1U)) 
+						     | ((~ (IData)(
+								   (vlTOPp->kb_state 
+								    >> 0x1dU))) 
+							<< 4U))) 
+						 & ((0x3ffffff0U 
+						     & ((IData)(vlTOPp->top_tv__DOT__kb__DOT__rows) 
+							>> 2U)) 
+						    | ((~ (IData)(
+								  (vlTOPp->kb_state 
+								   >> 0x22U))) 
+						       << 4U))) 
+						& ((0x1ffffff0U 
+						    & ((IData)(vlTOPp->top_tv__DOT__kb__DOT__rows) 
+						       >> 3U)) 
+						   | ((~ (IData)(
+								 (vlTOPp->kb_state 
+								  >> 0x27U))) 
+						      << 4U)))));
     vlTOPp->top_tv__DOT____Vcellinp__topcore__reset_n 
 	= (1U & (~ (IData)(vlTOPp->reset)));
+    vlTOPp->top_tv__DOT__cpu_din = ((IData)(vlTOPp->top_tv__DOT__mreq_n)
+				     ? (0xe0U | (IData)(vlTOPp->top_tv__DOT__kb__DOT__cols))
+				     : (IData)(vlTOPp->top_tv__DOT__mem_dout));
 }
 
 VL_INLINE_OPT void Vtop_tv::_sequent__TOP__10(Vtop_tv__Syms* __restrict vlSymsp) {
@@ -18651,6 +19216,9 @@ void Vtop_tv::_settle__TOP__11(Vtop_tv__Syms* __restrict vlSymsp) {
     VL_DEBUG_IF(VL_PRINTF("    Vtop_tv::_settle__TOP__11\n"); );
     Vtop_tv* __restrict vlTOPp VL_ATTR_UNUSED = vlSymsp->TOPp;
     // Body
+    vlTOPp->top_tv__DOT__cpu_din = ((IData)(vlTOPp->top_tv__DOT__mreq_n)
+				     ? (0xe0U | (IData)(vlTOPp->top_tv__DOT__kb__DOT__cols))
+				     : (IData)(vlTOPp->top_tv__DOT__mem_dout));
     // ALWAYS at tv80_core/tv80_core.v:368
     vlTOPp->top_tv__DOT__topcore__DOT__i_tv80_core__DOT__Save_Mux 
 	= ((IData)(vlTOPp->top_tv__DOT__topcore__DOT__i_tv80_core__DOT__ExchangeRp)
@@ -18886,6 +19454,7 @@ void Vtop_tv::_ctor_var_reset() {
     // Body
     clk = VL_RAND_RESET_I(1);
     reset = VL_RAND_RESET_I(1);
+    kb_state = VL_RAND_RESET_Q(40);
     addr = VL_RAND_RESET_I(16);
     top_tv__DOT__mem_dout = VL_RAND_RESET_I(8);
     top_tv__DOT__cpu_dout = VL_RAND_RESET_I(8);
@@ -18896,6 +19465,8 @@ void Vtop_tv::_ctor_var_reset() {
     top_tv__DOT__addr_raw = VL_RAND_RESET_I(16);
     top_tv__DOT__memory_reloc_enable = VL_RAND_RESET_I(1);
     top_tv__DOT____Vcellinp__topcore__reset_n = VL_RAND_RESET_I(1);
+    top_tv__DOT__kb__DOT__cols = VL_RAND_RESET_I(5);
+    top_tv__DOT__kb__DOT__rows = VL_RAND_RESET_I(8);
     { int __Vi0=0; for (; __Vi0<65536; ++__Vi0) {
 	    top_tv__DOT__memory__DOT__memory[__Vi0] = VL_RAND_RESET_I(8);
     }}

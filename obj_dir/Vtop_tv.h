@@ -29,6 +29,8 @@ VL_MODULE(Vtop_tv) {
     VL_IN8(clk,0,0);
     VL_IN8(reset,0,0);
     VL_OUT16(addr,15,0);
+    //char	__VpadToAlign4[4];
+    VL_IN64(kb_state,39,0);
     
     // LOCAL SIGNALS
     // Internals; generally not touched by application code
@@ -39,6 +41,8 @@ VL_MODULE(Vtop_tv) {
     VL_SIG8(top_tv__DOT__mreq_n,0,0);
     VL_SIG8(top_tv__DOT__iorq_n,0,0);
     VL_SIG8(top_tv__DOT__memory_reloc_enable,0,0);
+    VL_SIG8(top_tv__DOT__kb__DOT__cols,4,0);
+    VL_SIG8(top_tv__DOT__kb__DOT__rows,7,0);
     VL_SIG8(top_tv__DOT__topcore__DOT__no_read,0,0);
     VL_SIG8(top_tv__DOT__topcore__DOT__write,0,0);
     VL_SIG8(top_tv__DOT__topcore__DOT__di_reg,7,0);
@@ -166,9 +170,7 @@ VL_MODULE(Vtop_tv) {
     VL_SIG16(top_tv__DOT__topcore__DOT__i_tv80_core__DOT__SP16_B,15,0);
     VL_SIG16(top_tv__DOT__topcore__DOT__i_tv80_core__DOT__ID16_B,15,0);
     VL_SIG16(top_tv__DOT__topcore__DOT__i_tv80_core__DOT__i_alu__DOT__DAA_Q,8,0);
-    //char	__VpadToAlign158[2];
     VL_SIG(top_tv__DOT__memory__DOT__i,31,0);
-    //char	__VpadToAlign164[4];
     VL_SIG8(top_tv__DOT__memory__DOT__memory[65536],7,0);
     VL_SIG8(top_tv__DOT__topcore__DOT__i_tv80_core__DOT__i_reg__DOT__RegsH[8],7,0);
     VL_SIG8(top_tv__DOT__topcore__DOT__i_tv80_core__DOT__i_reg__DOT__RegsL[8],7,0);
@@ -298,7 +300,7 @@ VL_MODULE(Vtop_tv) {
     VL_SIG8(__Vclklast__TOP__clk,0,0);
     VL_SIG8(__Vclklast__TOP____VinpClk__TOP__top_tv__DOT____Vcellinp__topcore__reset_n,0,0);
     VL_SIG8(__Vchglast__TOP__top_tv__DOT____Vcellinp__topcore__reset_n,0,0);
-    //char	__VpadToAlign65847[1];
+    //char	__VpadToAlign65855[1];
     VL_SIG16(__Vdly__top_tv__DOT__topcore__DOT__i_tv80_core__DOT__PC,15,0);
     VL_SIG16(__Vdly__top_tv__DOT__topcore__DOT__i_tv80_core__DOT__SP,15,0);
     
