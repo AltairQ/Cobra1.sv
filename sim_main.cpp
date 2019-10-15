@@ -91,12 +91,6 @@ int main(int argc, char** argv, char** env) {
 		cnt += 1;
 		keystate_ttl -= (keystate_ttl == 0)?0:1;
 
-		if(read(STDIN_FILENO, &keycap, 1) == 1)
-		{
-			keystate = ascii_to_keystate(keycap);
-			keystate_ttl = 3*f2t;
-		}
-		
 		// Emulate keyboard
 		top->kb_state = (keystate_ttl > 0) ? keystate : 0;
 
@@ -112,6 +106,13 @@ int main(int argc, char** argv, char** env) {
 			{
 				printf("%c", (char)top->top_tv__DOT__memory__DOT__memory[i]);
 				if(i % 32 == 31) puts("");
+			}
+
+			// Read keyboard state
+			if(read(STDIN_FILENO, &keycap, 1) == 1)
+			{
+				keystate = ascii_to_keystate(keycap);
+				keystate_ttl = 3*f2t;
 			}
 		}
 

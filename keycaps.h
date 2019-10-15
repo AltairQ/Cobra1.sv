@@ -56,6 +56,7 @@ uint64_t ascii_to_keystate(char c)
 		case '8': return 1l<<(37);
 		case '7': return 1l<<(38);
 		case '6': return 1l<<(39);
+		default: return 0;
 	}
 }
 
