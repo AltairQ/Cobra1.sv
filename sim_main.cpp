@@ -4,6 +4,7 @@
 #include <unistd.h>
 #include <termios.h>
 #include <fcntl.h>
+#include <fstream>
 
 #include "keycaps.h"
 
@@ -60,28 +61,38 @@ int main(int argc, char** argv, char** env) {
 
 	// Read the ROM hex file path
 	const char* str;
+	std::string tape_file;
+	std::ifstream tape_fs;
+
 	str = Verilated::commandArgsPlusMatch("rom_file=");
 	if(str && str[0]) rom_hex = str + 10;
 
+	str = Verilated::commandArgsPlusMatch("tape_bytes=");
+	if(str && str[0]){
+		tape_file = str + 12;
+		tape_fs.open(tape_file, std::ifstream::binary);	
+	}
 
 	Vtop_tv* top = new Vtop_tv();
 	top->kb_state = 0;
+	top->tape_in = 0;
 
 	// CPU @ 3.25 MHz
-	// PAL @ 50 Hz
+	// PAL = 50 Hz
 	// 64935 ticks = 1 frame
 	const int f2t = 64935;
-	int last_tick = 30 * 50 * f2t; // 30 seconds
+	int last_tick = 3*60 * 50 * f2t; // 3 minutes
 
 
 	int cnt = 0; 
 	uint8_t clk = 0;
+	int tape_sample_cnt = 0;
 
 	while (!Verilated::gotFinish() && cnt < last_tick) {
 		// Let's give it a couple of cycles to reset
 		// I believe Z80 manual specifies 5 cycles
 		// Probably one cycle is necessary in this model
-		top->reset = cnt < 2 ? 1 : 0;
+		top->reset = cnt < 2;
 
 		// Tick
 		top->clk = 0;
@@ -93,6 +104,22 @@ int main(int argc, char** argv, char** env) {
 
 		// Emulate keyboard
 		top->kb_state = (keystate_ttl > 0) ? keystate : 0;
+
+		if(cnt >= f2t * 200)
+		{
+			uint16_t sample = 0;
+
+			if(tape_fs)
+			{
+				// puts("r");
+				if( tape_sample_cnt < (cnt - (f2t*50)) / 73.636f)
+				{
+					tape_fs.read((char*)&sample, 2);
+					tape_sample_cnt++;
+					top->tape_in = sample;
+				}				
+			}
+		}
 
 		// Emulate 50 Hz refresh rate (not at all real-time)
 		if(cnt % f2t == 0)

@@ -1,4 +1,4 @@
-module top_tv(input clk, input reset, input [39:0] kb_state, output [15:0] addr);
+module top_tv(input clk, input reset, input [39:0] kb_state, input [15:0] tape_in, output [15:0] addr);
 	logic [7:0] mem_dout;
 	logic [7:0] mem_din;
 
@@ -38,6 +38,10 @@ module top_tv(input clk, input reset, input [39:0] kb_state, output [15:0] addr)
 	kb_n_tape kb(
 		.ain(addr),
 		.keycaps(kb_state),
+		.tape_in(tape_in),
+		.tape_th(16'd4915),
+		.rst(reset),
+		.clk(clk),
 		.dout(kb_dout)
 	);
 

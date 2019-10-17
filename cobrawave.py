@@ -104,7 +104,7 @@ def decode(wpath, opath):
 
 def main():
 	if len(sys.argv) != 4:
-		print("Usage: {} -d <input file> <output".format(sys.argv[0]))
+		print("Usage: {} -d <input file> <output file>".format(sys.argv[0]))
 		sys.exit(-1)
 
 	if(sys.argv[1] == '-d'):
