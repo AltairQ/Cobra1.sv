@@ -75,7 +75,7 @@ int main(int argc, char** argv, char** env) {
 
 	Vtop_tv* top = new Vtop_tv();
 	top->kb_state = 0;
-	top->tape_in = 0;
+	top->tape_input = 0;
 
 	// CPU @ 3.25 MHz
 	// PAL = 50 Hz
@@ -92,7 +92,7 @@ int main(int argc, char** argv, char** env) {
 		// Let's give it a couple of cycles to reset
 		// I believe Z80 manual specifies 5 cycles
 		// Probably one cycle is necessary in this model
-		top->reset = cnt < 2;
+		top->rst_n = cnt >= 1;
 
 		// Tick
 		top->clk = 0;
@@ -116,7 +116,7 @@ int main(int argc, char** argv, char** env) {
 				{
 					tape_fs.read((char*)&sample, 2);
 					tape_sample_cnt++;
-					top->tape_in = sample;
+					top->tape_input = sample > 4915;
 				}				
 			}
 		}
@@ -126,12 +126,13 @@ int main(int argc, char** argv, char** env) {
 		{
 			// UNIX clear screen
 			printf("\e[1;1H\e[2J");
-			printf("Progress: %d / %d\n", (cnt/f2t), (last_tick/f2t) );
+			printf("Progress: %d / %d, A=%#06x, D=%#04x, %u\n", (cnt/f2t), (last_tick/f2t), top->addr, top->top_tv__DOT__i_cobra1__DOT__cpu_din, top->top_tv__DOT__i_cobra1__DOT__memory_reloc_enable);
 
+			
 			// Print out VRAM contents
 			for(int i = 0xf800; i <= 0xfb00; i++)
 			{
-				printf("%c", (char)top->top_tv__DOT__memory__DOT__memory[i]);
+				printf("%c", (char)top->top_tv__DOT__cpu_ram__DOT__memory[i]);
 				if(i % 32 == 31) puts("");
 			}
 
@@ -143,14 +144,14 @@ int main(int argc, char** argv, char** env) {
 			}
 		}
 
-		// Writing 0xAA to 0xC888 triggers success, used for testing
-		if(top->addr == 0xc888 &&
-			top->top_tv__DOT__cpu_dout == 0xaa &&
-			(1 & top->top_tv__DOT__wr_n) == 0)
-		{
-			printf("Success! (address triggered)\n");
-			return 0;
-		}
+		// // Writing 0xAA to 0xC888 triggers success, used for testing
+		// if(top->addr == 0xc888 &&
+		// 	top->top_tv__DOT__cpu_dout == 0xaa &&
+		// 	(1 & top->top_tv__DOT__wr_n) == 0)
+		// {
+		// 	printf("Success! (address triggered)\n");
+		// 	return 0;
+		// }
 	}
 	
 	delete top;

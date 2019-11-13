@@ -1,13 +1,12 @@
 // This module is an interface emulating the 74S412 (23) buffer,
 // which is connected to both the keyboard and the tape.
 module kb_n_tape (
-	input [39:0] keycaps, // keyboard switches state
-	input [15:0] ain, // A bus input
-	input signed [15:0] tape_in, // raw tape signal
-	input signed [15:0] tape_th, // threshold for detecting peaks from tape
-	input clk, // clock, used only for tape
-	input rst, // sync reset, just in case hold_ttl acts weird at the start
-	output [7:0] dout // output combining both keyboard response and tape data
+	input  [39:0] keycaps, // keyboard switches state
+	input  [15:0] ain    , // A bus input
+	input         tape_in, // quanitzed tape signal, also named "MIG" on the schematics
+	input         clk    , // clock, used only for tape
+	input         rst    , // sync reset, just in case hold_ttl acts weird at the start
+	output [ 7:0] dout     // output combining both keyboard response and tape data
 );
 
 	/*
@@ -37,22 +36,19 @@ module kb_n_tape (
 	logic [4:0] cols; // output from the key matrix, effectively D4-D0
 	logic [7:0] rows; // input to the key matrix, effectively A12..15..11
 	logic [10:0] hold_ttl; // simple counter to implement monostable multivib.
-	logic tape_hi; // has the signal passed the threshold? also named "MIG"
 	logic nq; // output pin 12 of the multivibrator (26), negated output
 
-	// please note that despite the suffix high input signals the '0' symbol
-	// as it triggers the normally-high multivibrator 
-	assign tape_hi = tape_in >= tape_th;
 	assign nq = hold_ttl == 0;
 
 	assign rows[7:0] = {ain[12],ain[13],ain[14],ain[15],ain[8],ain[9],ain[10],ain[11]};
-	assign dout[7:0] = {tape_hi, nq, 1'b1, cols};
+	assign dout[7:0] = {tape_in, nq, 1'b1, cols};
 
+	// Implementation of the monostable multivibrator
 	always_ff @(posedge clk) begin : proc_hold_ttl
 		if(rst) begin
 			hold_ttl <= 0;
 		end else begin
-			if(tape_in >= tape_th) begin
+			if(tape_in) begin
 				hold_ttl <= hold_ccount;
 			end else begin
 				hold_ttl <= (hold_ttl==0) ? 0 : hold_ttl-1;
