@@ -36,6 +36,8 @@ module cobra1 (
 	logic [7:0] cpu_dout;
 	logic [7:0] cpu_din;
 
+	logic [10:0] v_ram_a_vga;
+
 	logic [7:0] kb_dout;
 
 	logic rd_n, wr_n;
@@ -45,6 +47,28 @@ module cobra1 (
 	logic [15:0] addr;
 
 	logic memory_reloc_enable;
+
+	// signal cpu accessing vram
+	logic cpu_vram_rq;
+	assign cpu_vram_rq = (~mreq_n) && (addr >= 16'hF800);
+
+	logic v_ctrl_override; // should CPU take over VRAM control?
+
+	// synchronise the signal into pixel clock domain
+	synchroniser i_synchroniser	(
+		.clk(clk_pxl), .dirty(cpu_vram_rq), .clean(v_ctrl_override)
+	);
+
+	always_comb begin 
+		if(v_ctrl_override) begin
+			v_ram_a = addr[10:0]; // TODO maybe synchronise the address?
+			v_ram_w = cpu_ram_w;
+		end else begin
+			v_ram_a = v_ram_a_vga;
+			v_ram_w = 1'b0;
+		end
+	end
+
 
 	assign addr      = memory_reloc_enable ? (addr_raw | 16'hC000 ): addr_raw;
 	assign cpu_rom_a = addr_raw[10:0];
@@ -56,6 +80,9 @@ module cobra1 (
 
 	// Assume any kind of I/O reads are forwarded to the keyboard
 	assign cpu_din = (mreq_n) ? kb_dout : mem_dout;
+
+
+	assign v_ram_do = cpu_dout;
 
 
 	// Update state of the reset-relocation
@@ -95,7 +122,7 @@ module cobra1 (
 		.clk_pxl    (clk_pxl    ),
 		.v_font_di  (v_font_di  ),
 		.v_ram_di   (v_ram_di   ),
-		.v_ram_a    (v_ram_a    ),
+		.v_ram_a    (v_ram_a_vga),
 		.v_font_a   (v_font_a   ),
 		.VGA_B      (VGA_B      ),
 		.VGA_BLANK_N(VGA_BLANK_N),

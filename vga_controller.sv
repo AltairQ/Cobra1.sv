@@ -36,6 +36,9 @@ module vga_controller (
 	assign VGA_G = draw ? 8'hff : 8'h00;
 	assign VGA_B = draw ? 8'hff : 8'h00;
 
+
+	assign v_ram_a = h_cnt/8 + 32*(v_cnt/8);
+
 	// ROM address is ASCII code + row number
 	assign v_font_a  = {v_ram_di, v_cnt[2:0]};
 	assign crow_bits = v_font_di; // font data for current char & row
