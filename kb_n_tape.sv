@@ -60,7 +60,7 @@ module kb_n_tape (
 	generate
 		genvar c_i;
 
-		for(c_i = 0; c_i < 5; c_i++)
+		for(c_i = 0; c_i < 5; c_i++) begin : quartusfix
 			assign cols[c_i] = 
 						(rows[0] | ~keycaps[c_i + 0*5])&
 						(rows[1] | ~keycaps[c_i + 1*5])&
@@ -70,6 +70,7 @@ module kb_n_tape (
 						(rows[5] | ~keycaps[c_i + 5*5])&
 						(rows[6] | ~keycaps[c_i + 6*5])&
 						(rows[7] | ~keycaps[c_i + 7*5]);
+		end
 	endgenerate
 
 endmodule

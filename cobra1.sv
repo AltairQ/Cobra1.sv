@@ -1,30 +1,37 @@
 module cobra1 (
-	input         clk_cpu   , // Z80 3.25 MHz clock
-	input         clk_pxl   , // pixel and vram clock
+	input         clk_cpu    , // Z80 3.25 MHz clock
+	input         clk_pxl    , // pixel (and vram) clock
 	// input clk_tape,
-	input         rst_n     , // reset active low
-	input  [39:0] kb_state  , // raw switches state, see kb_n_tape.sv
-	input         tape_input, // raw tape input, after the comparator
-	input  [ 7:0] cpu_ram_di, // data from RAM
-	input  [ 7:0] cpu_rom_di, // data from ROM
-	input  [ 7:0] v_font_di , // data from font ROM
-	input  [ 7:0] v_ram_di  , // data from VRAM (ascii buffer)
+	input         rst_n      , // reset active low
+	input  [39:0] kb_state   , // raw switches state, see kb_n_tape.sv
+	input         tape_input , // raw tape input, after the comparator
+	input  [ 7:0] cpu_ram_di , // data from RAM
+	input  [ 7:0] cpu_rom_di , // data from ROM
+	input  [ 7:0] v_font_di  , // data from font ROM
+	input  [ 7:0] v_ram_di   , // data from VRAM (ascii buffer)
 	// ------------------
-	output [15:0] cpu_ram_a , // RAM address out
-	output [7:0]  cpu_ram_do, // RAM data out
-	output        cpu_ram_w , // RAM write signal
+	output [15:0] cpu_ram_a  , // RAM address out
+	output [ 7:0] cpu_ram_do , // RAM data out
+	output        cpu_ram_w  , // RAM write signal
 	//
-	output [10:0] cpu_rom_a , // ROM address out
+	output [10:0] cpu_rom_a  , // ROM address out
 	//
-	output [10:0] v_font_a  , // font ROM address out
+	output [10:0] v_font_a   , // font ROM address out
 	//
-	output [10:0] v_ram_a   , // VRAM address out
-	output [7:0]  v_ram_do  , // VRAM data out
-	output        v_ram_w    // VRAM write signal
+	output [10:0] v_ram_a    , // VRAM address out
+	output [ 7:0] v_ram_do   , // VRAM data out
+	output        v_ram_w    ,  // VRAM write signal
+	output [ 7:0] VGA_B      ,
+	output        VGA_BLANK_N,
+	output        VGA_CLK    ,
+	output [ 7:0] VGA_G      ,
+	output        VGA_HS     ,
+	output [ 7:0] VGA_R      ,
+	output        VGA_SYNC_N ,
+	output        VGA_VS
 );
 
 	logic [7:0] mem_dout;
-	logic [7:0] mem_din;
 
 	logic [7:0] cpu_dout;
 	logic [7:0] cpu_din;
@@ -39,7 +46,7 @@ module cobra1 (
 
 	logic memory_reloc_enable;
 
-	assign addr    = memory_reloc_enable ? (addr_raw | 16'hC000 ): addr_raw;
+	assign addr      = memory_reloc_enable ? (addr_raw | 16'hC000 ): addr_raw;
 	assign cpu_rom_a = addr_raw[10:0];
 	assign cpu_ram_a = addr;
 
@@ -65,12 +72,14 @@ module cobra1 (
 			end
 		end
 
-	// Choose between ROM and RAM
+	// Choose read between ROM/VRAM/RAM
 	always_comb begin
 		if (addr >= 16'hC000 && addr < 16'hC800)
 			mem_dout = cpu_rom_di;
+		else if (addr >= 16'hF800)
+			mem_dout = v_ram_di;
 		else
-			mem_dout = cpu_ram_di;	
+			mem_dout = cpu_ram_di;
 	end
 
 	kb_n_tape kb (
@@ -80,6 +89,22 @@ module cobra1 (
 		.rst    (~rst_n    ),
 		.clk    (clk_cpu   ),
 		.dout   (kb_dout   )
+	);
+
+	vga_controller i_vga_controller (
+		.clk_pxl    (clk_pxl    ),
+		.v_font_di  (v_font_di  ),
+		.v_ram_di   (v_ram_di   ),
+		.v_ram_a    (v_ram_a    ),
+		.v_font_a   (v_font_a   ),
+		.VGA_B      (VGA_B      ),
+		.VGA_BLANK_N(VGA_BLANK_N),
+		.VGA_CLK    (VGA_CLK    ),
+		.VGA_G      (VGA_G      ),
+		.VGA_HS     (VGA_HS     ),
+		.VGA_R      (VGA_R      ),
+		.VGA_SYNC_N (VGA_SYNC_N ),
+		.VGA_VS     (VGA_VS     )
 	);
 
 	tv80s topcore (

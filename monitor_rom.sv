@@ -10,8 +10,7 @@ module monitor_rom (
 	assign out = memory[a];
 
 	initial begin
-		`ifdef ROM_HEX
-			$readmemh(`ROM_HEX, memory);
-		`endif
+		$readmemh(`ROM_HEX, memory);
+
 	end
 endmodule
