@@ -1,0 +1,792 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<deploy
+ date="2020.01.09.17:00:42"
+ outputDirectory="J:/altera crap/system builder/CodeGenerated/DE2_115/CobraDE2/audio_all/">
+ <perimeter>
+  <parameter
+     name="AUTO_GENERATION_ID"
+     type="Integer"
+     defaultValue="0"
+     onHdl="0"
+     affectsHdl="1" />
+  <parameter
+     name="AUTO_UNIQUE_ID"
+     type="String"
+     defaultValue=""
+     onHdl="0"
+     affectsHdl="1" />
+  <parameter
+     name="AUTO_DEVICE_FAMILY"
+     type="String"
+     defaultValue="Cyclone IV E"
+     onHdl="0"
+     affectsHdl="1" />
+  <parameter
+     name="AUTO_DEVICE"
+     type="String"
+     defaultValue="EP4CE115F29C7"
+     onHdl="0"
+     affectsHdl="1" />
+  <parameter
+     name="AUTO_DEVICE_SPEEDGRADE"
+     type="String"
+     defaultValue="7"
+     onHdl="0"
+     affectsHdl="1" />
+  <parameter
+     name="AUTO_CLK_CLOCK_RATE"
+     type="Long"
+     defaultValue="-1"
+     onHdl="0"
+     affectsHdl="1" />
+  <parameter
+     name="AUTO_CLK_CLOCK_DOMAIN"
+     type="Integer"
+     defaultValue="-1"
+     onHdl="0"
+     affectsHdl="1" />
+  <parameter
+     name="AUTO_CLK_RESET_DOMAIN"
+     type="Integer"
+     defaultValue="-1"
+     onHdl="0"
+     affectsHdl="1" />
+  <interface
+     name="audio_0_avalon_left_channel_sink"
+     kind="avalon_streaming"
+     start="0">
+   <property name="associatedClock" value="clk" />
+   <property name="associatedReset" value="reset" />
+   <property name="beatsPerCycle" value="1" />
+   <property name="dataBitsPerSymbol" value="8" />
+   <property name="emptyWithinPacket" value="false" />
+   <property name="errorDescriptor" value="" />
+   <property name="firstSymbolInHighOrderBits" value="true" />
+   <property name="highOrderSymbolAtMSB" value="false" />
+   <property name="maxChannel" value="0" />
+   <property name="packetDescription" value="" />
+   <property name="readyLatency" value="0" />
+   <property name="symbolsPerBeat" value="1" />
+   <port
+       name="audio_0_avalon_left_channel_sink_data"
+       direction="input"
+       role="data"
+       width="24" />
+   <port
+       name="audio_0_avalon_left_channel_sink_valid"
+       direction="input"
+       role="valid"
+       width="1" />
+   <port
+       name="audio_0_avalon_left_channel_sink_ready"
+       direction="output"
+       role="ready"
+       width="1" />
+  </interface>
+  <interface
+     name="audio_0_avalon_left_channel_source"
+     kind="avalon_streaming"
+     start="1">
+   <property name="associatedClock" value="clk" />
+   <property name="associatedReset" value="reset" />
+   <property name="beatsPerCycle" value="1" />
+   <property name="dataBitsPerSymbol" value="8" />
+   <property name="emptyWithinPacket" value="false" />
+   <property name="errorDescriptor" value="" />
+   <property name="firstSymbolInHighOrderBits" value="true" />
+   <property name="highOrderSymbolAtMSB" value="false" />
+   <property name="maxChannel" value="0" />
+   <property name="packetDescription" value="" />
+   <property name="readyLatency" value="0" />
+   <property name="symbolsPerBeat" value="1" />
+   <port
+       name="audio_0_avalon_left_channel_source_ready"
+       direction="input"
+       role="ready"
+       width="1" />
+   <port
+       name="audio_0_avalon_left_channel_source_data"
+       direction="output"
+       role="data"
+       width="24" />
+   <port
+       name="audio_0_avalon_left_channel_source_valid"
+       direction="output"
+       role="valid"
+       width="1" />
+  </interface>
+  <interface
+     name="audio_0_avalon_right_channel_sink"
+     kind="avalon_streaming"
+     start="0">
+   <property name="associatedClock" value="clk" />
+   <property name="associatedReset" value="reset" />
+   <property name="beatsPerCycle" value="1" />
+   <property name="dataBitsPerSymbol" value="8" />
+   <property name="emptyWithinPacket" value="false" />
+   <property name="errorDescriptor" value="" />
+   <property name="firstSymbolInHighOrderBits" value="true" />
+   <property name="highOrderSymbolAtMSB" value="false" />
+   <property name="maxChannel" value="0" />
+   <property name="packetDescription" value="" />
+   <property name="readyLatency" value="0" />
+   <property name="symbolsPerBeat" value="1" />
+   <port
+       name="audio_0_avalon_right_channel_sink_data"
+       direction="input"
+       role="data"
+       width="24" />
+   <port
+       name="audio_0_avalon_right_channel_sink_valid"
+       direction="input"
+       role="valid"
+       width="1" />
+   <port
+       name="audio_0_avalon_right_channel_sink_ready"
+       direction="output"
+       role="ready"
+       width="1" />
+  </interface>
+  <interface
+     name="audio_0_avalon_right_channel_source"
+     kind="avalon_streaming"
+     start="1">
+   <property name="associatedClock" value="clk" />
+   <property name="associatedReset" value="reset" />
+   <property name="beatsPerCycle" value="1" />
+   <property name="dataBitsPerSymbol" value="8" />
+   <property name="emptyWithinPacket" value="false" />
+   <property name="errorDescriptor" value="" />
+   <property name="firstSymbolInHighOrderBits" value="true" />
+   <property name="highOrderSymbolAtMSB" value="false" />
+   <property name="maxChannel" value="0" />
+   <property name="packetDescription" value="" />
+   <property name="readyLatency" value="0" />
+   <property name="symbolsPerBeat" value="1" />
+   <port
+       name="audio_0_avalon_right_channel_source_ready"
+       direction="input"
+       role="ready"
+       width="1" />
+   <port
+       name="audio_0_avalon_right_channel_source_data"
+       direction="output"
+       role="data"
+       width="24" />
+   <port
+       name="audio_0_avalon_right_channel_source_valid"
+       direction="output"
+       role="valid"
+       width="1" />
+  </interface>
+  <interface name="audio_0_external_interface" kind="conduit" start="0">
+   <property name="associatedClock" value="" />
+   <property name="associatedReset" value="" />
+   <port
+       name="audio_0_external_interface_ADCDAT"
+       direction="input"
+       role="ADCDAT"
+       width="1" />
+   <port
+       name="audio_0_external_interface_ADCLRCK"
+       direction="input"
+       role="ADCLRCK"
+       width="1" />
+   <port
+       name="audio_0_external_interface_BCLK"
+       direction="input"
+       role="BCLK"
+       width="1" />
+   <port
+       name="audio_0_external_interface_DACDAT"
+       direction="output"
+       role="DACDAT"
+       width="1" />
+   <port
+       name="audio_0_external_interface_DACLRCK"
+       direction="input"
+       role="DACLRCK"
+       width="1" />
+  </interface>
+  <interface
+     name="audio_and_video_config_0_external_interface"
+     kind="conduit"
+     start="0">
+   <property name="associatedClock" value="" />
+   <property name="associatedReset" value="" />
+   <port
+       name="audio_and_video_config_0_external_interface_SDAT"
+       direction="bidir"
+       role="SDAT"
+       width="1" />
+   <port
+       name="audio_and_video_config_0_external_interface_SCLK"
+       direction="output"
+       role="SCLK"
+       width="1" />
+  </interface>
+  <interface name="clk" kind="clock" start="0">
+   <property name="clockRate" value="50000000" />
+   <property name="externallyDriven" value="false" />
+   <property name="ptfSchematicName" value="" />
+   <port name="clk_clk" direction="input" role="clk" width="1" />
+  </interface>
+  <interface name="clock_bridge_0_out_clk" kind="clock" start="1">
+   <property name="associatedDirectClock" value="" />
+   <property name="clockRate" value="12288000" />
+   <property name="clockRateKnown" value="true" />
+   <property name="externallyDriven" value="false" />
+   <property name="ptfSchematicName" value="" />
+   <port
+       name="clock_bridge_0_out_clk_clk"
+       direction="output"
+       role="clk"
+       width="1" />
+  </interface>
+  <interface name="reset" kind="reset" start="0">
+   <property name="associatedClock" value="" />
+   <property name="synchronousEdges" value="NONE" />
+   <port name="reset_reset_n" direction="input" role="reset_n" width="1" />
+  </interface>
+ </perimeter>
+ <entity
+   path=""
+   parameterizationKey="audio_all:1.0:AUTO_CLK_CLOCK_DOMAIN=-1,AUTO_CLK_CLOCK_RATE=-1,AUTO_CLK_RESET_DOMAIN=-1,AUTO_DEVICE=EP4CE115F29C7,AUTO_DEVICE_FAMILY=Cyclone IV E,AUTO_DEVICE_SPEEDGRADE=7,AUTO_GENERATION_ID=1578585640,AUTO_UNIQUE_ID=(altera_up_avalon_audio:18.0:AUTO_CLK_CLOCK_RATE=50000000,AUTO_DEVICE_FAMILY=Cyclone IV E,audio_in=true,audio_out=true,avalon_bus_type=Streaming,dw=24)(altera_up_avalon_audio_and_video_config:18.0:AUTO_CLK_CLOCK_RATE=50000000,AUTO_DEVICE_FAMILY=Cyclone IV E,audio_in=Line In to ADC,bit_length=24,board=DE2-115,bosr=250fs/256fs,d5m_resolution=2592 x 1944,dac_enable=true,data_format=Left Justified,device=On-Board Peripherals,eai=true,exposure=false,line_in_bypass=false,mic_attenuation=-6dB,mic_bypass=false,sampling_rate=48 kHz,sr_register=0,video_format=NTSC)(altera_up_avalon_audio_pll:18.0:AUTO_DEVICE=EP4CE115F29C7,AUTO_DEVICE_SPEEDGRADE=7,audio_clk_freq=12.288,device_family=Cyclone IV E,gui_refclk=50.0,refclk=50.0(altera_up_altpll:18.0:DEVICE_FAMILY=Cyclone IV,OUTCLK0_DIV=297,OUTCLK0_MULT=73,OUTCLK1_DIV=1,OUTCLK1_MULT=1,OUTCLK2_DIV=1,OUTCLK2_MULT=1,PHASE_SHIFT=0,audio_clk_freq=12.288,gui_device_family=Cyclone IV E,type=Audio,video_in=5MP Digital Camera (THDB_D5M),video_out=4.3&quot; LCD (TRDB_LTM))(altera_up_avalon_reset_from_locked_signal:18.0:)(conduit:18.1:endPort=,endPortLSB=0,startPort=,startPortLSB=0,width=0))(clock_source:18.1:clockFrequency=50000000,clockFrequencyKnown=true,inputClockFrequency=0,resetSynchronousEdges=NONE)(altera_clock_bridge:18.1:DERIVED_CLOCK_RATE=12288000,EXPLICIT_CLOCK_RATE=12288000,NUM_CLOCK_OUTPUTS=1)(clock:18.1:)(clock:18.1:)(clock:18.1:)(clock:18.1:)(reset:18.1:)(reset:18.1:)(reset:18.1:)"
+   instancePathKey="audio_all"
+   kind="audio_all"
+   version="1.0"
+   name="audio_all">
+  <parameter name="AUTO_CLK_CLOCK_RATE" value="-1" />
+  <parameter name="AUTO_GENERATION_ID" value="1578585640" />
+  <parameter name="AUTO_DEVICE" value="EP4CE115F29C7" />
+  <parameter name="AUTO_DEVICE_FAMILY" value="Cyclone IV E" />
+  <parameter name="AUTO_CLK_RESET_DOMAIN" value="-1" />
+  <parameter name="AUTO_CLK_CLOCK_DOMAIN" value="-1" />
+  <parameter name="AUTO_UNIQUE_ID" value="" />
+  <parameter name="AUTO_DEVICE_SPEEDGRADE" value="7" />
+  <generatedFiles>
+   <file
+       path="J:/altera crap/system builder/CodeGenerated/DE2_115/CobraDE2/audio_all/synthesis/audio_all.v"
+       type="VERILOG" />
+  </generatedFiles>
+  <childGeneratedFiles>
+   <file
+       path="J:/altera crap/system builder/CodeGenerated/DE2_115/CobraDE2/audio_all/synthesis/submodules/altera_up_audio_bit_counter.v"
+       type="VERILOG" />
+   <file
+       path="J:/altera crap/system builder/CodeGenerated/DE2_115/CobraDE2/audio_all/synthesis/submodules/altera_up_audio_in_deserializer.v"
+       type="VERILOG" />
+   <file
+       path="J:/altera crap/system builder/CodeGenerated/DE2_115/CobraDE2/audio_all/synthesis/submodules/altera_up_audio_out_serializer.v"
+       type="VERILOG" />
+   <file
+       path="J:/altera crap/system builder/CodeGenerated/DE2_115/CobraDE2/audio_all/synthesis/submodules/altera_up_clock_edge.v"
+       type="VERILOG" />
+   <file
+       path="J:/altera crap/system builder/CodeGenerated/DE2_115/CobraDE2/audio_all/synthesis/submodules/altera_up_sync_fifo.v"
+       type="VERILOG" />
+   <file
+       path="J:/altera crap/system builder/CodeGenerated/DE2_115/CobraDE2/audio_all/synthesis/submodules/audio_all_audio_0.v"
+       type="VERILOG" />
+   <file
+       path="J:/altera crap/system builder/CodeGenerated/DE2_115/CobraDE2/audio_all/synthesis/submodules/altera_up_av_config_serial_bus_controller.v"
+       type="VERILOG" />
+   <file
+       path="J:/altera crap/system builder/CodeGenerated/DE2_115/CobraDE2/audio_all/synthesis/submodules/altera_up_slow_clock_generator.v"
+       type="VERILOG" />
+   <file
+       path="J:/altera crap/system builder/CodeGenerated/DE2_115/CobraDE2/audio_all/synthesis/submodules/altera_up_av_config_auto_init.v"
+       type="VERILOG" />
+   <file
+       path="J:/altera crap/system builder/CodeGenerated/DE2_115/CobraDE2/audio_all/synthesis/submodules/altera_up_av_config_auto_init_dc2.v"
+       type="VERILOG" />
+   <file
+       path="J:/altera crap/system builder/CodeGenerated/DE2_115/CobraDE2/audio_all/synthesis/submodules/altera_up_av_config_auto_init_d5m.v"
+       type="VERILOG" />
+   <file
+       path="J:/altera crap/system builder/CodeGenerated/DE2_115/CobraDE2/audio_all/synthesis/submodules/altera_up_av_config_auto_init_lcm.v"
+       type="VERILOG" />
+   <file
+       path="J:/altera crap/system builder/CodeGenerated/DE2_115/CobraDE2/audio_all/synthesis/submodules/altera_up_av_config_auto_init_ltm.v"
+       type="VERILOG" />
+   <file
+       path="J:/altera crap/system builder/CodeGenerated/DE2_115/CobraDE2/audio_all/synthesis/submodules/altera_up_av_config_auto_init_ob_de1_soc.v"
+       type="VERILOG" />
+   <file
+       path="J:/altera crap/system builder/CodeGenerated/DE2_115/CobraDE2/audio_all/synthesis/submodules/altera_up_av_config_auto_init_ob_de2_115.v"
+       type="VERILOG" />
+   <file
+       path="J:/altera crap/system builder/CodeGenerated/DE2_115/CobraDE2/audio_all/synthesis/submodules/altera_up_av_config_auto_init_ob_de2i_150.v"
+       type="VERILOG" />
+   <file
+       path="J:/altera crap/system builder/CodeGenerated/DE2_115/CobraDE2/audio_all/synthesis/submodules/altera_up_av_config_auto_init_ob_de10_standard.v"
+       type="VERILOG" />
+   <file
+       path="J:/altera crap/system builder/CodeGenerated/DE2_115/CobraDE2/audio_all/synthesis/submodules/altera_up_av_config_auto_init_ob_audio.v"
+       type="VERILOG" />
+   <file
+       path="J:/altera crap/system builder/CodeGenerated/DE2_115/CobraDE2/audio_all/synthesis/submodules/altera_up_av_config_auto_init_ob_adv7180.v"
+       type="VERILOG" />
+   <file
+       path="J:/altera crap/system builder/CodeGenerated/DE2_115/CobraDE2/audio_all/synthesis/submodules/altera_up_av_config_auto_init_ob_adv7181.v"
+       type="VERILOG" />
+   <file
+       path="J:/altera crap/system builder/CodeGenerated/DE2_115/CobraDE2/audio_all/synthesis/submodules/audio_all_audio_and_video_config_0.v"
+       type="VERILOG" />
+   <file
+       path="J:/altera crap/system builder/CodeGenerated/DE2_115/CobraDE2/audio_all/synthesis/submodules/audio_all_audio_pll_0.v"
+       type="VERILOG" />
+   <file
+       path="J:/altera crap/system builder/CodeGenerated/DE2_115/CobraDE2/audio_all/synthesis/submodules/altera_up_altpll.v"
+       type="VERILOG"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="J:/altera crap/system builder/CodeGenerated/DE2_115/CobraDE2/audio_all/synthesis/submodules/altera_up_avalon_reset_from_locked_signal.v"
+       type="VERILOG"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="J:/altera crap/system builder/CodeGenerated/DE2_115/CobraDE2/audio_all/synthesis/submodules/altera_reset_controller.v"
+       type="VERILOG"
+       attributes="" />
+   <file
+       path="J:/altera crap/system builder/CodeGenerated/DE2_115/CobraDE2/audio_all/synthesis/submodules/altera_reset_synchronizer.v"
+       type="VERILOG"
+       attributes="" />
+   <file
+       path="J:/altera crap/system builder/CodeGenerated/DE2_115/CobraDE2/audio_all/synthesis/submodules/altera_reset_controller.sdc"
+       type="SDC"
+       attributes="" />
+  </childGeneratedFiles>
+  <sourceFiles>
+   <file
+       path="J:/altera crap/system builder/CodeGenerated/DE2_115/CobraDE2/audio_all.qsys" />
+  </sourceFiles>
+  <childSourceFiles>
+   <file
+       path="C:/intelfpga_lite/18.1/ip/altera/university_program/audio_video/altera_up_avalon_audio/altera_up_avalon_audio_hw.tcl" />
+   <file
+       path="C:/intelfpga_lite/18.1/ip/altera/university_program/audio_video/altera_up_avalon_audio/hdl/altera_up_audio_bit_counter.v" />
+   <file
+       path="C:/intelfpga_lite/18.1/ip/altera/university_program/audio_video/altera_up_avalon_audio/hdl/altera_up_audio_in_deserializer.v" />
+   <file
+       path="C:/intelfpga_lite/18.1/ip/altera/university_program/audio_video/altera_up_avalon_audio/hdl/altera_up_audio_out_serializer.v" />
+   <file
+       path="C:/intelfpga_lite/18.1/ip/altera/university_program/audio_video/altera_up_avalon_audio/hdl/altera_up_clock_edge.v" />
+   <file
+       path="C:/intelfpga_lite/18.1/ip/altera/university_program/audio_video/altera_up_avalon_audio/hdl/altera_up_sync_fifo.v" />
+   <file
+       path="C:/intelfpga_lite/18.1/ip/altera/university_program/audio_video/altera_up_avalon_audio_and_video_config/altera_up_avalon_audio_and_video_config_hw.tcl" />
+   <file
+       path="C:/intelfpga_lite/18.1/ip/altera/university_program/audio_video/altera_up_avalon_audio_and_video_config/hdl/altera_up_av_config_serial_bus_controller.v" />
+   <file
+       path="C:/intelfpga_lite/18.1/ip/altera/university_program/audio_video/altera_up_avalon_audio_and_video_config/hdl/altera_up_slow_clock_generator.v" />
+   <file
+       path="C:/intelfpga_lite/18.1/ip/altera/university_program/audio_video/altera_up_avalon_audio_and_video_config/hdl/altera_up_av_config_auto_init.v" />
+   <file
+       path="C:/intelfpga_lite/18.1/ip/altera/university_program/audio_video/altera_up_avalon_audio_and_video_config/hdl/altera_up_av_config_auto_init_dc2.v" />
+   <file
+       path="C:/intelfpga_lite/18.1/ip/altera/university_program/audio_video/altera_up_avalon_audio_and_video_config/hdl/altera_up_av_config_auto_init_d5m.v" />
+   <file
+       path="C:/intelfpga_lite/18.1/ip/altera/university_program/audio_video/altera_up_avalon_audio_and_video_config/hdl/altera_up_av_config_auto_init_lcm.v" />
+   <file
+       path="C:/intelfpga_lite/18.1/ip/altera/university_program/audio_video/altera_up_avalon_audio_and_video_config/hdl/altera_up_av_config_auto_init_ltm.v" />
+   <file
+       path="C:/intelfpga_lite/18.1/ip/altera/university_program/audio_video/altera_up_avalon_audio_and_video_config/hdl/altera_up_av_config_auto_init_ob_de1_soc.v" />
+   <file
+       path="C:/intelfpga_lite/18.1/ip/altera/university_program/audio_video/altera_up_avalon_audio_and_video_config/hdl/altera_up_av_config_auto_init_ob_de2_115.v" />
+   <file
+       path="C:/intelfpga_lite/18.1/ip/altera/university_program/audio_video/altera_up_avalon_audio_and_video_config/hdl/altera_up_av_config_auto_init_ob_de2i_150.v" />
+   <file
+       path="C:/intelfpga_lite/18.1/ip/altera/university_program/audio_video/altera_up_avalon_audio_and_video_config/hdl/altera_up_av_config_auto_init_ob_de10_standard.v" />
+   <file
+       path="C:/intelfpga_lite/18.1/ip/altera/university_program/audio_video/altera_up_avalon_audio_and_video_config/hdl/altera_up_av_config_auto_init_ob_audio.v" />
+   <file
+       path="C:/intelfpga_lite/18.1/ip/altera/university_program/audio_video/altera_up_avalon_audio_and_video_config/hdl/altera_up_av_config_auto_init_ob_adv7180.v" />
+   <file
+       path="C:/intelfpga_lite/18.1/ip/altera/university_program/audio_video/altera_up_avalon_audio_and_video_config/hdl/altera_up_av_config_auto_init_ob_adv7181.v" />
+   <file
+       path="C:/intelfpga_lite/18.1/ip/altera/university_program/clocks/altera_up_avalon_audio_pll/altera_up_avalon_audio_pll_hw.tcl" />
+   <file
+       path="C:/intelfpga_lite/18.1/ip/altera/university_program/clocks/altera_up_altpll/altera_up_altpll_hw.tcl" />
+   <file
+       path="C:/intelfpga_lite/18.1/ip/altera/university_program/clocks/altera_up_avalon_reset_from_locked_signal/altera_up_avalon_reset_from_locked_signal_hw.tcl" />
+   <file
+       path="C:/intelfpga_lite/18.1/ip/altera/merlin/altera_reset_controller/altera_reset_controller_hw.tcl" />
+  </childSourceFiles>
+  <messages>
+   <message level="Debug" culprit="audio_all">queue size: 0 starting:audio_all "audio_all"</message>
+   <message level="Progress" culprit="min"></message>
+   <message level="Progress" culprit="max"></message>
+   <message level="Progress" culprit="current"></message>
+   <message level="Debug">Transform: CustomInstructionTransform</message>
+   <message level="Debug">No custom instruction connections, skipping transform </message>
+   <message level="Debug" culprit="merlin_custom_instruction_transform"><![CDATA[After transform: <b>5</b> modules, <b>7</b> connections]]></message>
+   <message level="Debug">Transform: MMTransform</message>
+   <message level="Debug">Transform: InterruptMapperTransform</message>
+   <message level="Debug">Transform: InterruptSyncTransform</message>
+   <message level="Debug">Transform: InterruptFanoutTransform</message>
+   <message level="Debug">Transform: AvalonStreamingTransform</message>
+   <message level="Debug">Transform: ResetAdaptation</message>
+   <message level="Progress" culprit="min"></message>
+   <message level="Progress" culprit="max"></message>
+   <message level="Progress" culprit="current"></message>
+   <message level="Debug" culprit="reset_adaptation_transform"><![CDATA[After transform: <b>6</b> modules, <b>9</b> connections]]></message>
+   <message level="Debug" culprit="audio_all"><![CDATA["<b>audio_all</b>" reuses <b>altera_up_avalon_audio</b> "<b>submodules/audio_all_audio_0</b>"]]></message>
+   <message level="Debug" culprit="audio_all"><![CDATA["<b>audio_all</b>" reuses <b>altera_up_avalon_audio_and_video_config</b> "<b>submodules/audio_all_audio_and_video_config_0</b>"]]></message>
+   <message level="Debug" culprit="audio_all"><![CDATA["<b>audio_all</b>" reuses <b>altera_up_avalon_audio_pll</b> "<b>submodules/audio_all_audio_pll_0</b>"]]></message>
+   <message level="Debug" culprit="audio_all"><![CDATA["<b>audio_all</b>" reuses <b>altera_reset_controller</b> "<b>submodules/altera_reset_controller</b>"]]></message>
+   <message level="Debug" culprit="audio_all">queue size: 3 starting:altera_up_avalon_audio "submodules/audio_all_audio_0"</message>
+   <message level="Info" culprit="audio_0">Starting Generation of Audio Controller</message>
+   <message level="Info" culprit="audio_0"><![CDATA["<b>audio_all</b>" instantiated <b>altera_up_avalon_audio</b> "<b>audio_0</b>"]]></message>
+   <message level="Debug" culprit="audio_all">queue size: 2 starting:altera_up_avalon_audio_and_video_config "submodules/audio_all_audio_and_video_config_0"</message>
+   <message level="Info" culprit="audio_and_video_config_0">Starting Generation of Audio and Video Config</message>
+   <message level="Info" culprit="audio_and_video_config_0"><![CDATA["<b>audio_all</b>" instantiated <b>altera_up_avalon_audio_and_video_config</b> "<b>audio_and_video_config_0</b>"]]></message>
+   <message level="Debug" culprit="audio_all">queue size: 1 starting:altera_up_avalon_audio_pll "submodules/audio_all_audio_pll_0"</message>
+   <message level="Progress" culprit="min"></message>
+   <message level="Progress" culprit="max"></message>
+   <message level="Progress" culprit="current"></message>
+   <message level="Debug">Transform: CustomInstructionTransform</message>
+   <message level="Debug">No custom instruction connections, skipping transform </message>
+   <message level="Debug" culprit="merlin_custom_instruction_transform"><![CDATA[After transform: <b>2</b> modules, <b>1</b> connections]]></message>
+   <message level="Debug">Transform: MMTransform</message>
+   <message level="Debug">Transform: InterruptMapperTransform</message>
+   <message level="Debug">Transform: InterruptSyncTransform</message>
+   <message level="Debug">Transform: InterruptFanoutTransform</message>
+   <message level="Debug">Transform: AvalonStreamingTransform</message>
+   <message level="Debug">Transform: ResetAdaptation</message>
+   <message level="Debug" culprit="audio_pll_0"><![CDATA["<b>audio_pll_0</b>" reuses <b>altera_up_altpll</b> "<b>submodules/altera_up_altpll</b>"]]></message>
+   <message level="Debug" culprit="audio_pll_0"><![CDATA["<b>audio_pll_0</b>" reuses <b>altera_up_avalon_reset_from_locked_signal</b> "<b>submodules/altera_up_avalon_reset_from_locked_signal</b>"]]></message>
+   <message level="Info" culprit="audio_pll_0"><![CDATA["<b>audio_all</b>" instantiated <b>altera_up_avalon_audio_pll</b> "<b>audio_pll_0</b>"]]></message>
+   <message level="Debug" culprit="audio_all">queue size: 1 starting:altera_up_altpll "submodules/altera_up_altpll"</message>
+   <message level="Info" culprit="audio_pll"><![CDATA["<b>audio_pll_0</b>" instantiated <b>altera_up_altpll</b> "<b>audio_pll</b>"]]></message>
+   <message level="Debug" culprit="audio_all">queue size: 0 starting:altera_up_avalon_reset_from_locked_signal "submodules/altera_up_avalon_reset_from_locked_signal"</message>
+   <message level="Info" culprit="reset_from_locked"><![CDATA["<b>audio_pll_0</b>" instantiated <b>altera_up_avalon_reset_from_locked_signal</b> "<b>reset_from_locked</b>"]]></message>
+   <message level="Debug" culprit="audio_all">queue size: 2 starting:altera_reset_controller "submodules/altera_reset_controller"</message>
+   <message level="Info" culprit="rst_controller"><![CDATA["<b>audio_all</b>" instantiated <b>altera_reset_controller</b> "<b>rst_controller</b>"]]></message>
+  </messages>
+ </entity>
+ <entity
+   path="submodules/"
+   parameterizationKey="altera_up_avalon_audio:18.0:AUTO_CLK_CLOCK_RATE=50000000,AUTO_DEVICE_FAMILY=Cyclone IV E,audio_in=true,audio_out=true,avalon_bus_type=Streaming,dw=24"
+   instancePathKey="audio_all:.:audio_0"
+   kind="altera_up_avalon_audio"
+   version="18.0"
+   name="audio_all_audio_0">
+  <parameter name="AUTO_CLK_CLOCK_RATE" value="50000000" />
+  <parameter name="dw" value="24" />
+  <parameter name="avalon_bus_type" value="Streaming" />
+  <parameter name="audio_in" value="true" />
+  <parameter name="AUTO_DEVICE_FAMILY" value="Cyclone IV E" />
+  <parameter name="audio_out" value="true" />
+  <generatedFiles>
+   <file
+       path="J:/altera crap/system builder/CodeGenerated/DE2_115/CobraDE2/audio_all/synthesis/submodules/altera_up_audio_bit_counter.v"
+       type="VERILOG" />
+   <file
+       path="J:/altera crap/system builder/CodeGenerated/DE2_115/CobraDE2/audio_all/synthesis/submodules/altera_up_audio_in_deserializer.v"
+       type="VERILOG" />
+   <file
+       path="J:/altera crap/system builder/CodeGenerated/DE2_115/CobraDE2/audio_all/synthesis/submodules/altera_up_audio_out_serializer.v"
+       type="VERILOG" />
+   <file
+       path="J:/altera crap/system builder/CodeGenerated/DE2_115/CobraDE2/audio_all/synthesis/submodules/altera_up_clock_edge.v"
+       type="VERILOG" />
+   <file
+       path="J:/altera crap/system builder/CodeGenerated/DE2_115/CobraDE2/audio_all/synthesis/submodules/altera_up_sync_fifo.v"
+       type="VERILOG" />
+   <file
+       path="J:/altera crap/system builder/CodeGenerated/DE2_115/CobraDE2/audio_all/synthesis/submodules/audio_all_audio_0.v"
+       type="VERILOG" />
+  </generatedFiles>
+  <childGeneratedFiles/>
+  <sourceFiles>
+   <file
+       path="C:/intelfpga_lite/18.1/ip/altera/university_program/audio_video/altera_up_avalon_audio/altera_up_avalon_audio_hw.tcl" />
+   <file
+       path="C:/intelfpga_lite/18.1/ip/altera/university_program/audio_video/altera_up_avalon_audio/hdl/altera_up_audio_bit_counter.v" />
+   <file
+       path="C:/intelfpga_lite/18.1/ip/altera/university_program/audio_video/altera_up_avalon_audio/hdl/altera_up_audio_in_deserializer.v" />
+   <file
+       path="C:/intelfpga_lite/18.1/ip/altera/university_program/audio_video/altera_up_avalon_audio/hdl/altera_up_audio_out_serializer.v" />
+   <file
+       path="C:/intelfpga_lite/18.1/ip/altera/university_program/audio_video/altera_up_avalon_audio/hdl/altera_up_clock_edge.v" />
+   <file
+       path="C:/intelfpga_lite/18.1/ip/altera/university_program/audio_video/altera_up_avalon_audio/hdl/altera_up_sync_fifo.v" />
+  </sourceFiles>
+  <childSourceFiles/>
+  <instantiator instantiator="audio_all" as="audio_0" />
+  <messages>
+   <message level="Debug" culprit="audio_all">queue size: 3 starting:altera_up_avalon_audio "submodules/audio_all_audio_0"</message>
+   <message level="Info" culprit="audio_0">Starting Generation of Audio Controller</message>
+   <message level="Info" culprit="audio_0"><![CDATA["<b>audio_all</b>" instantiated <b>altera_up_avalon_audio</b> "<b>audio_0</b>"]]></message>
+  </messages>
+ </entity>
+ <entity
+   path="submodules/"
+   parameterizationKey="altera_up_avalon_audio_and_video_config:18.0:AUTO_CLK_CLOCK_RATE=50000000,AUTO_DEVICE_FAMILY=Cyclone IV E,audio_in=Line In to ADC,bit_length=24,board=DE2-115,bosr=250fs/256fs,d5m_resolution=2592 x 1944,dac_enable=true,data_format=Left Justified,device=On-Board Peripherals,eai=true,exposure=false,line_in_bypass=false,mic_attenuation=-6dB,mic_bypass=false,sampling_rate=48 kHz,sr_register=0,video_format=NTSC"
+   instancePathKey="audio_all:.:audio_and_video_config_0"
+   kind="altera_up_avalon_audio_and_video_config"
+   version="18.0"
+   name="audio_all_audio_and_video_config_0">
+  <parameter name="data_format" value="Left Justified" />
+  <parameter name="AUTO_CLK_CLOCK_RATE" value="50000000" />
+  <parameter name="bosr" value="250fs/256fs" />
+  <parameter name="audio_in" value="Line In to ADC" />
+  <parameter name="AUTO_DEVICE_FAMILY" value="Cyclone IV E" />
+  <parameter name="d5m_resolution" value="2592 x 1944" />
+  <parameter name="video_format" value="NTSC" />
+  <parameter name="dac_enable" value="true" />
+  <parameter name="eai" value="true" />
+  <parameter name="line_in_bypass" value="false" />
+  <parameter name="bit_length" value="24" />
+  <parameter name="sampling_rate" value="48 kHz" />
+  <parameter name="sr_register" value="0" />
+  <parameter name="mic_bypass" value="false" />
+  <parameter name="exposure" value="false" />
+  <parameter name="mic_attenuation" value="-6dB" />
+  <parameter name="device" value="On-Board Peripherals" />
+  <parameter name="board" value="DE2-115" />
+  <generatedFiles>
+   <file
+       path="J:/altera crap/system builder/CodeGenerated/DE2_115/CobraDE2/audio_all/synthesis/submodules/altera_up_av_config_serial_bus_controller.v"
+       type="VERILOG" />
+   <file
+       path="J:/altera crap/system builder/CodeGenerated/DE2_115/CobraDE2/audio_all/synthesis/submodules/altera_up_slow_clock_generator.v"
+       type="VERILOG" />
+   <file
+       path="J:/altera crap/system builder/CodeGenerated/DE2_115/CobraDE2/audio_all/synthesis/submodules/altera_up_av_config_auto_init.v"
+       type="VERILOG" />
+   <file
+       path="J:/altera crap/system builder/CodeGenerated/DE2_115/CobraDE2/audio_all/synthesis/submodules/altera_up_av_config_auto_init_dc2.v"
+       type="VERILOG" />
+   <file
+       path="J:/altera crap/system builder/CodeGenerated/DE2_115/CobraDE2/audio_all/synthesis/submodules/altera_up_av_config_auto_init_d5m.v"
+       type="VERILOG" />
+   <file
+       path="J:/altera crap/system builder/CodeGenerated/DE2_115/CobraDE2/audio_all/synthesis/submodules/altera_up_av_config_auto_init_lcm.v"
+       type="VERILOG" />
+   <file
+       path="J:/altera crap/system builder/CodeGenerated/DE2_115/CobraDE2/audio_all/synthesis/submodules/altera_up_av_config_auto_init_ltm.v"
+       type="VERILOG" />
+   <file
+       path="J:/altera crap/system builder/CodeGenerated/DE2_115/CobraDE2/audio_all/synthesis/submodules/altera_up_av_config_auto_init_ob_de1_soc.v"
+       type="VERILOG" />
+   <file
+       path="J:/altera crap/system builder/CodeGenerated/DE2_115/CobraDE2/audio_all/synthesis/submodules/altera_up_av_config_auto_init_ob_de2_115.v"
+       type="VERILOG" />
+   <file
+       path="J:/altera crap/system builder/CodeGenerated/DE2_115/CobraDE2/audio_all/synthesis/submodules/altera_up_av_config_auto_init_ob_de2i_150.v"
+       type="VERILOG" />
+   <file
+       path="J:/altera crap/system builder/CodeGenerated/DE2_115/CobraDE2/audio_all/synthesis/submodules/altera_up_av_config_auto_init_ob_de10_standard.v"
+       type="VERILOG" />
+   <file
+       path="J:/altera crap/system builder/CodeGenerated/DE2_115/CobraDE2/audio_all/synthesis/submodules/altera_up_av_config_auto_init_ob_audio.v"
+       type="VERILOG" />
+   <file
+       path="J:/altera crap/system builder/CodeGenerated/DE2_115/CobraDE2/audio_all/synthesis/submodules/altera_up_av_config_auto_init_ob_adv7180.v"
+       type="VERILOG" />
+   <file
+       path="J:/altera crap/system builder/CodeGenerated/DE2_115/CobraDE2/audio_all/synthesis/submodules/altera_up_av_config_auto_init_ob_adv7181.v"
+       type="VERILOG" />
+   <file
+       path="J:/altera crap/system builder/CodeGenerated/DE2_115/CobraDE2/audio_all/synthesis/submodules/audio_all_audio_and_video_config_0.v"
+       type="VERILOG" />
+  </generatedFiles>
+  <childGeneratedFiles/>
+  <sourceFiles>
+   <file
+       path="C:/intelfpga_lite/18.1/ip/altera/university_program/audio_video/altera_up_avalon_audio_and_video_config/altera_up_avalon_audio_and_video_config_hw.tcl" />
+   <file
+       path="C:/intelfpga_lite/18.1/ip/altera/university_program/audio_video/altera_up_avalon_audio_and_video_config/hdl/altera_up_av_config_serial_bus_controller.v" />
+   <file
+       path="C:/intelfpga_lite/18.1/ip/altera/university_program/audio_video/altera_up_avalon_audio_and_video_config/hdl/altera_up_slow_clock_generator.v" />
+   <file
+       path="C:/intelfpga_lite/18.1/ip/altera/university_program/audio_video/altera_up_avalon_audio_and_video_config/hdl/altera_up_av_config_auto_init.v" />
+   <file
+       path="C:/intelfpga_lite/18.1/ip/altera/university_program/audio_video/altera_up_avalon_audio_and_video_config/hdl/altera_up_av_config_auto_init_dc2.v" />
+   <file
+       path="C:/intelfpga_lite/18.1/ip/altera/university_program/audio_video/altera_up_avalon_audio_and_video_config/hdl/altera_up_av_config_auto_init_d5m.v" />
+   <file
+       path="C:/intelfpga_lite/18.1/ip/altera/university_program/audio_video/altera_up_avalon_audio_and_video_config/hdl/altera_up_av_config_auto_init_lcm.v" />
+   <file
+       path="C:/intelfpga_lite/18.1/ip/altera/university_program/audio_video/altera_up_avalon_audio_and_video_config/hdl/altera_up_av_config_auto_init_ltm.v" />
+   <file
+       path="C:/intelfpga_lite/18.1/ip/altera/university_program/audio_video/altera_up_avalon_audio_and_video_config/hdl/altera_up_av_config_auto_init_ob_de1_soc.v" />
+   <file
+       path="C:/intelfpga_lite/18.1/ip/altera/university_program/audio_video/altera_up_avalon_audio_and_video_config/hdl/altera_up_av_config_auto_init_ob_de2_115.v" />
+   <file
+       path="C:/intelfpga_lite/18.1/ip/altera/university_program/audio_video/altera_up_avalon_audio_and_video_config/hdl/altera_up_av_config_auto_init_ob_de2i_150.v" />
+   <file
+       path="C:/intelfpga_lite/18.1/ip/altera/university_program/audio_video/altera_up_avalon_audio_and_video_config/hdl/altera_up_av_config_auto_init_ob_de10_standard.v" />
+   <file
+       path="C:/intelfpga_lite/18.1/ip/altera/university_program/audio_video/altera_up_avalon_audio_and_video_config/hdl/altera_up_av_config_auto_init_ob_audio.v" />
+   <file
+       path="C:/intelfpga_lite/18.1/ip/altera/university_program/audio_video/altera_up_avalon_audio_and_video_config/hdl/altera_up_av_config_auto_init_ob_adv7180.v" />
+   <file
+       path="C:/intelfpga_lite/18.1/ip/altera/university_program/audio_video/altera_up_avalon_audio_and_video_config/hdl/altera_up_av_config_auto_init_ob_adv7181.v" />
+  </sourceFiles>
+  <childSourceFiles/>
+  <instantiator instantiator="audio_all" as="audio_and_video_config_0" />
+  <messages>
+   <message level="Debug" culprit="audio_all">queue size: 2 starting:altera_up_avalon_audio_and_video_config "submodules/audio_all_audio_and_video_config_0"</message>
+   <message level="Info" culprit="audio_and_video_config_0">Starting Generation of Audio and Video Config</message>
+   <message level="Info" culprit="audio_and_video_config_0"><![CDATA["<b>audio_all</b>" instantiated <b>altera_up_avalon_audio_and_video_config</b> "<b>audio_and_video_config_0</b>"]]></message>
+  </messages>
+ </entity>
+ <entity
+   path="submodules/"
+   parameterizationKey="altera_up_avalon_audio_pll:18.0:AUTO_DEVICE=EP4CE115F29C7,AUTO_DEVICE_SPEEDGRADE=7,audio_clk_freq=12.288,device_family=Cyclone IV E,gui_refclk=50.0,refclk=50.0(altera_up_altpll:18.0:DEVICE_FAMILY=Cyclone IV,OUTCLK0_DIV=297,OUTCLK0_MULT=73,OUTCLK1_DIV=1,OUTCLK1_MULT=1,OUTCLK2_DIV=1,OUTCLK2_MULT=1,PHASE_SHIFT=0,audio_clk_freq=12.288,gui_device_family=Cyclone IV E,type=Audio,video_in=5MP Digital Camera (THDB_D5M),video_out=4.3&quot; LCD (TRDB_LTM))(altera_up_avalon_reset_from_locked_signal:18.0:)(conduit:18.1:endPort=,endPortLSB=0,startPort=,startPortLSB=0,width=0)"
+   instancePathKey="audio_all:.:audio_pll_0"
+   kind="altera_up_avalon_audio_pll"
+   version="18.0"
+   name="audio_all_audio_pll_0">
+  <parameter name="gui_refclk" value="50.0" />
+  <parameter name="AUTO_DEVICE" value="EP4CE115F29C7" />
+  <parameter name="refclk" value="50.0" />
+  <parameter name="device_family" value="Cyclone IV E" />
+  <parameter name="AUTO_DEVICE_SPEEDGRADE" value="7" />
+  <parameter name="audio_clk_freq" value="12.288" />
+  <generatedFiles>
+   <file
+       path="J:/altera crap/system builder/CodeGenerated/DE2_115/CobraDE2/audio_all/synthesis/submodules/audio_all_audio_pll_0.v"
+       type="VERILOG" />
+  </generatedFiles>
+  <childGeneratedFiles>
+   <file
+       path="J:/altera crap/system builder/CodeGenerated/DE2_115/CobraDE2/audio_all/synthesis/submodules/altera_up_altpll.v"
+       type="VERILOG"
+       attributes="TOP_LEVEL_FILE" />
+   <file
+       path="J:/altera crap/system builder/CodeGenerated/DE2_115/CobraDE2/audio_all/synthesis/submodules/altera_up_avalon_reset_from_locked_signal.v"
+       type="VERILOG"
+       attributes="TOP_LEVEL_FILE" />
+  </childGeneratedFiles>
+  <sourceFiles>
+   <file
+       path="C:/intelfpga_lite/18.1/ip/altera/university_program/clocks/altera_up_avalon_audio_pll/altera_up_avalon_audio_pll_hw.tcl" />
+  </sourceFiles>
+  <childSourceFiles>
+   <file
+       path="C:/intelfpga_lite/18.1/ip/altera/university_program/clocks/altera_up_altpll/altera_up_altpll_hw.tcl" />
+   <file
+       path="C:/intelfpga_lite/18.1/ip/altera/university_program/clocks/altera_up_avalon_reset_from_locked_signal/altera_up_avalon_reset_from_locked_signal_hw.tcl" />
+  </childSourceFiles>
+  <instantiator instantiator="audio_all" as="audio_pll_0" />
+  <messages>
+   <message level="Debug" culprit="audio_all">queue size: 1 starting:altera_up_avalon_audio_pll "submodules/audio_all_audio_pll_0"</message>
+   <message level="Progress" culprit="min"></message>
+   <message level="Progress" culprit="max"></message>
+   <message level="Progress" culprit="current"></message>
+   <message level="Debug">Transform: CustomInstructionTransform</message>
+   <message level="Debug">No custom instruction connections, skipping transform </message>
+   <message level="Debug" culprit="merlin_custom_instruction_transform"><![CDATA[After transform: <b>2</b> modules, <b>1</b> connections]]></message>
+   <message level="Debug">Transform: MMTransform</message>
+   <message level="Debug">Transform: InterruptMapperTransform</message>
+   <message level="Debug">Transform: InterruptSyncTransform</message>
+   <message level="Debug">Transform: InterruptFanoutTransform</message>
+   <message level="Debug">Transform: AvalonStreamingTransform</message>
+   <message level="Debug">Transform: ResetAdaptation</message>
+   <message level="Debug" culprit="audio_pll_0"><![CDATA["<b>audio_pll_0</b>" reuses <b>altera_up_altpll</b> "<b>submodules/altera_up_altpll</b>"]]></message>
+   <message level="Debug" culprit="audio_pll_0"><![CDATA["<b>audio_pll_0</b>" reuses <b>altera_up_avalon_reset_from_locked_signal</b> "<b>submodules/altera_up_avalon_reset_from_locked_signal</b>"]]></message>
+   <message level="Info" culprit="audio_pll_0"><![CDATA["<b>audio_all</b>" instantiated <b>altera_up_avalon_audio_pll</b> "<b>audio_pll_0</b>"]]></message>
+   <message level="Debug" culprit="audio_all">queue size: 1 starting:altera_up_altpll "submodules/altera_up_altpll"</message>
+   <message level="Info" culprit="audio_pll"><![CDATA["<b>audio_pll_0</b>" instantiated <b>altera_up_altpll</b> "<b>audio_pll</b>"]]></message>
+   <message level="Debug" culprit="audio_all">queue size: 0 starting:altera_up_avalon_reset_from_locked_signal "submodules/altera_up_avalon_reset_from_locked_signal"</message>
+   <message level="Info" culprit="reset_from_locked"><![CDATA["<b>audio_pll_0</b>" instantiated <b>altera_up_avalon_reset_from_locked_signal</b> "<b>reset_from_locked</b>"]]></message>
+  </messages>
+ </entity>
+ <entity
+   path="submodules/"
+   parameterizationKey="altera_reset_controller:18.1:ADAPT_RESET_REQUEST=0,MIN_RST_ASSERTION_TIME=3,NUM_RESET_INPUTS=1,OUTPUT_RESET_SYNC_EDGES=deassert,RESET_REQUEST_PRESENT=0,RESET_REQ_EARLY_DSRT_TIME=1,RESET_REQ_WAIT_TIME=1,SYNC_DEPTH=2,USE_RESET_REQUEST_IN0=0,USE_RESET_REQUEST_IN1=0,USE_RESET_REQUEST_IN10=0,USE_RESET_REQUEST_IN11=0,USE_RESET_REQUEST_IN12=0,USE_RESET_REQUEST_IN13=0,USE_RESET_REQUEST_IN14=0,USE_RESET_REQUEST_IN15=0,USE_RESET_REQUEST_IN2=0,USE_RESET_REQUEST_IN3=0,USE_RESET_REQUEST_IN4=0,USE_RESET_REQUEST_IN5=0,USE_RESET_REQUEST_IN6=0,USE_RESET_REQUEST_IN7=0,USE_RESET_REQUEST_IN8=0,USE_RESET_REQUEST_IN9=0,USE_RESET_REQUEST_INPUT=0"
+   instancePathKey="audio_all:.:rst_controller"
+   kind="altera_reset_controller"
+   version="18.1"
+   name="altera_reset_controller">
+  <generatedFiles>
+   <file
+       path="J:/altera crap/system builder/CodeGenerated/DE2_115/CobraDE2/audio_all/synthesis/submodules/altera_reset_controller.v"
+       type="VERILOG"
+       attributes="" />
+   <file
+       path="J:/altera crap/system builder/CodeGenerated/DE2_115/CobraDE2/audio_all/synthesis/submodules/altera_reset_synchronizer.v"
+       type="VERILOG"
+       attributes="" />
+   <file
+       path="J:/altera crap/system builder/CodeGenerated/DE2_115/CobraDE2/audio_all/synthesis/submodules/altera_reset_controller.sdc"
+       type="SDC"
+       attributes="" />
+  </generatedFiles>
+  <childGeneratedFiles/>
+  <sourceFiles>
+   <file
+       path="C:/intelfpga_lite/18.1/ip/altera/merlin/altera_reset_controller/altera_reset_controller_hw.tcl" />
+  </sourceFiles>
+  <childSourceFiles/>
+  <instantiator instantiator="audio_all" as="rst_controller" />
+  <messages>
+   <message level="Debug" culprit="audio_all">queue size: 2 starting:altera_reset_controller "submodules/altera_reset_controller"</message>
+   <message level="Info" culprit="rst_controller"><![CDATA["<b>audio_all</b>" instantiated <b>altera_reset_controller</b> "<b>rst_controller</b>"]]></message>
+  </messages>
+ </entity>
+ <entity
+   path="submodules/"
+   parameterizationKey="altera_up_altpll:18.0:DEVICE_FAMILY=Cyclone IV,OUTCLK0_DIV=297,OUTCLK0_MULT=73,OUTCLK1_DIV=1,OUTCLK1_MULT=1,OUTCLK2_DIV=1,OUTCLK2_MULT=1,PHASE_SHIFT=0,audio_clk_freq=12.288,gui_device_family=Cyclone IV E,type=Audio,video_in=5MP Digital Camera (THDB_D5M),video_out=4.3&quot; LCD (TRDB_LTM)"
+   instancePathKey="audio_all:.:audio_pll_0:.:audio_pll"
+   kind="altera_up_altpll"
+   version="18.0"
+   name="altera_up_altpll">
+  <parameter name="OUTCLK0_DIV" value="297" />
+  <parameter name="OUTCLK2_MULT" value="1" />
+  <parameter name="PHASE_SHIFT" value="0" />
+  <parameter name="OUTCLK1_DIV" value="1" />
+  <parameter name="OUTCLK0_MULT" value="73" />
+  <parameter name="DEVICE_FAMILY" value="Cyclone IV" />
+  <parameter name="video_in" value="5MP Digital Camera (THDB_D5M)" />
+  <parameter name="gui_device_family" value="Cyclone IV E" />
+  <parameter name="OUTCLK2_DIV" value="1" />
+  <parameter name="OUTCLK1_MULT" value="1" />
+  <generatedFiles>
+   <file
+       path="J:/altera crap/system builder/CodeGenerated/DE2_115/CobraDE2/audio_all/synthesis/submodules/altera_up_altpll.v"
+       type="VERILOG"
+       attributes="TOP_LEVEL_FILE" />
+  </generatedFiles>
+  <childGeneratedFiles/>
+  <sourceFiles>
+   <file
+       path="C:/intelfpga_lite/18.1/ip/altera/university_program/clocks/altera_up_altpll/altera_up_altpll_hw.tcl" />
+  </sourceFiles>
+  <childSourceFiles/>
+  <instantiator instantiator="audio_all_audio_pll_0" as="audio_pll" />
+  <messages>
+   <message level="Debug" culprit="audio_all">queue size: 1 starting:altera_up_altpll "submodules/altera_up_altpll"</message>
+   <message level="Info" culprit="audio_pll"><![CDATA["<b>audio_pll_0</b>" instantiated <b>altera_up_altpll</b> "<b>audio_pll</b>"]]></message>
+  </messages>
+ </entity>
+ <entity
+   path="submodules/"
+   parameterizationKey="altera_up_avalon_reset_from_locked_signal:18.0:"
+   instancePathKey="audio_all:.:audio_pll_0:.:reset_from_locked"
+   kind="altera_up_avalon_reset_from_locked_signal"
+   version="18.0"
+   name="altera_up_avalon_reset_from_locked_signal">
+  <generatedFiles>
+   <file
+       path="J:/altera crap/system builder/CodeGenerated/DE2_115/CobraDE2/audio_all/synthesis/submodules/altera_up_avalon_reset_from_locked_signal.v"
+       type="VERILOG"
+       attributes="TOP_LEVEL_FILE" />
+  </generatedFiles>
+  <childGeneratedFiles/>
+  <sourceFiles>
+   <file
+       path="C:/intelfpga_lite/18.1/ip/altera/university_program/clocks/altera_up_avalon_reset_from_locked_signal/altera_up_avalon_reset_from_locked_signal_hw.tcl" />
+  </sourceFiles>
+  <childSourceFiles/>
+  <instantiator instantiator="audio_all_audio_pll_0" as="reset_from_locked" />
+  <messages>
+   <message level="Debug" culprit="audio_all">queue size: 0 starting:altera_up_avalon_reset_from_locked_signal "submodules/altera_up_avalon_reset_from_locked_signal"</message>
+   <message level="Info" culprit="reset_from_locked"><![CDATA["<b>audio_pll_0</b>" instantiated <b>altera_up_avalon_reset_from_locked_signal</b> "<b>reset_from_locked</b>"]]></message>
+  </messages>
+ </entity>
+</deploy>

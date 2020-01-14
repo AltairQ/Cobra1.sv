@@ -4,3 +4,13 @@ obj_dir/
 msim_project.cr.mti
 vsim.wlf
 vish_stacktrace.vstf
+CobraDE2.asm.rpt
+CobraDE2.done
+CobraDE2.fit.smsg
+CobraDE2.fit.rpt
+CobraDE2.fit.summary
+*.rpt
+*.smsg
+*.summary
+db/
+incremental_db/

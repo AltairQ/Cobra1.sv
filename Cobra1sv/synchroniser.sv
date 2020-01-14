@@ -7,7 +7,7 @@ module synchroniser #(parameter LVLS=2) (
 
 	initial buffer <= 0;
 
-	assign clean = buffer[LVLS-1];
+	assign clean = &buffer;
 
 	always @(posedge clk)
 		buffer <= {buffer[LVLS-2:0], dirty};
