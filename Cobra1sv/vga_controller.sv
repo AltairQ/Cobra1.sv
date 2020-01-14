@@ -31,19 +31,19 @@ module vga_controller (
 	assign VGA_HS = !(h_cnt > (640+16) && h_cnt <= (640+16+96));
 	assign VGA_VS = !(v_cnt > (400+12) && v_cnt <= (400+12+2));
 
-	assign draw = (h_cnt < 640 && v_cnt < 400) & (cpxl | tape_input);
+	assign draw = (h_cnt < 512 && v_cnt < 384) & (cpxl | tape_input);
 
 	assign VGA_R = draw ? 8'hff : 8'h00;
 	assign VGA_G = draw ? 8'hff : 8'h00;
 	assign VGA_B = draw ? 8'hff : 8'h00;
 
 
-	assign v_ram_a = h_cnt/8 + 32*(v_cnt/8);
+	assign v_ram_a = h_cnt/16 + 32*(v_cnt/16);
 
 	// ROM address is ASCII code + row number
-	assign v_font_a  = {v_ram_di, v_cnt[2:0]};
+	assign v_font_a  = {v_ram_di, v_cnt[3:1]};
 	assign crow_bits = v_font_di; // font data for current char & row
-	assign cpxl      = crow_bits[7-h_cnt[2:0]]; // horizontal offset
+	assign cpxl      = crow_bits[7-h_cnt[3:1]]; // horizontal offset
 
 	initial begin
 		h_cnt <= 0;
