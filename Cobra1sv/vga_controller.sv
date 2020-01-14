@@ -2,6 +2,7 @@ module vga_controller (
 	input         clk_pxl    , // pixel clock
 	input  [ 7:0] v_font_di  ,
 	input  [ 7:0] v_ram_di   ,
+	input         tape_input ,
 	output [10:0] v_ram_a    ,
 	output [10:0] v_font_a   ,
 	output [ 7:0] VGA_B      ,
@@ -30,7 +31,7 @@ module vga_controller (
 	assign VGA_HS = !(h_cnt > (640+16) && h_cnt <= (640+16+96));
 	assign VGA_VS = !(v_cnt > (400+12) && v_cnt <= (400+12+2));
 
-	assign draw = (h_cnt < 640 && v_cnt < 400) & cpxl;
+	assign draw = (h_cnt < 640 && v_cnt < 400) & (cpxl | tape_input);
 
 	assign VGA_R = draw ? 8'hff : 8'h00;
 	assign VGA_G = draw ? 8'hff : 8'h00;

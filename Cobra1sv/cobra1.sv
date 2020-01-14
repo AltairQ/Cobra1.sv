@@ -122,6 +122,7 @@ module cobra1 (
 		.clk_pxl    (clk_pxl    ),
 		.v_font_di  (v_font_di  ),
 		.v_ram_di   (v_ram_di   ),
+		.tape_input (tape_input ),
 		.v_ram_a    (v_ram_a_vga),
 		.v_font_a   (v_font_a   ),
 		.VGA_B      (VGA_B      ),
