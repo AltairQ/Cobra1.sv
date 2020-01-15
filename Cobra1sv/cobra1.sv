@@ -1,34 +1,36 @@
 module cobra1 (
-	input         clk_cpu    , // Z80 3.25 MHz clock
-	input         clk_pxl    , // pixel (and vram) clock
+	input         clk_cpu        , // Z80 3.25 MHz clock
+	input         clk_pxl        , // pixel (and vram) clock
 	// input clk_tape,
-	input         rst_n      , // reset active low
-	input  [39:0] kb_state   , // raw switches state, see kb_n_tape.sv
-	input         tape_input , // raw tape input, after the comparator
-	input  [ 7:0] cpu_ram_di , // data from RAM
-	input  [ 7:0] cpu_rom_di , // data from ROM
-	input  [ 7:0] v_font_di  , // data from font ROM
-	input  [ 7:0] v_ram_di   , // data from VRAM (ascii buffer)
+	input         rst_n          , // reset active low
+	input  [39:0] kb_state       , // raw switches state, see kb_n_tape.sv
+	input         tape_input     , // raw tape input, after the comparator
+	input  [ 7:0] cpu_ram_di     , // data from RAM
+	input  [ 7:0] cpu_rom_di     , // data from ROM
+	input  [ 7:0] v_font_di      , // data from font ROM
+	input  [ 7:0] v_ram_di       , // data from VRAM (ascii buffer)
 	// ------------------
-	output [15:0] cpu_ram_a  , // RAM address out
-	output [ 7:0] cpu_ram_do , // RAM data out
-	output        cpu_ram_w  , // RAM write signal
+	output [15:0] cpu_ram_a      , // RAM address out
+	output [ 7:0] cpu_ram_do     , // RAM data out
+	output        cpu_ram_w      , // RAM write signal
 	//
-	output [10:0] cpu_rom_a  , // ROM address out
+	output [10:0] cpu_rom_a      , // ROM address out
 	//
-	output [10:0] v_font_a   , // font ROM address out
+	output [10:0] v_font_a       , // font ROM address out
 	//
-	output [10:0] v_ram_a    , // VRAM address out
-	output [ 7:0] v_ram_do   , // VRAM data out
-	output        v_ram_w    ,  // VRAM write signal
-	output [ 7:0] VGA_B      ,
-	output        VGA_BLANK_N,
-	output        VGA_CLK    ,
-	output [ 7:0] VGA_G      ,
-	output        VGA_HS     ,
-	output [ 7:0] VGA_R      ,
-	output        VGA_SYNC_N ,
-	output        VGA_VS
+	output [10:0] v_ram_a        , // VRAM address out
+	output [ 7:0] v_ram_do       , // VRAM data out
+	output        v_ram_w        , // VRAM write signal
+	output [ 7:0] VGA_B          ,
+	output        VGA_BLANK_N    ,
+	output        VGA_CLK        ,
+	output [ 7:0] VGA_G          ,
+	output        VGA_HS         ,
+	output [ 7:0] VGA_R          ,
+	output        VGA_SYNC_N     ,
+	output        VGA_VS         ,
+	output        tape_output_pos,
+	output        tape_output_neg
 );
 
 	logic [7:0] mem_dout;
@@ -59,7 +61,7 @@ module cobra1 (
 		.clk(clk_pxl), .dirty(cpu_vram_rq), .clean(v_ctrl_override)
 	);
 
-	always_comb begin 
+	always_comb begin
 		if(v_ctrl_override) begin
 			v_ram_a = addr[10:0]; // TODO maybe synchronise the address?
 			v_ram_w = cpu_ram_w;
@@ -88,7 +90,7 @@ module cobra1 (
 	// Update state of the reset-relocation
 	// This causes the CPU to start execution at 0xC000,
 	// but is then disabled by OUT (1F), ??
-	always @(posedge clk_cpu)
+	always_ff @(posedge clk_cpu)
 		begin
 			if(~rst_n) begin
 				memory_reloc_enable <= 1'b1;
@@ -108,6 +110,26 @@ module cobra1 (
 		else
 			mem_dout = cpu_ram_di;
 	end
+
+
+	wire tape_output_trigger;
+
+	assign tape_output_trigger = ~iorq_n && (addr_raw[2] & addr_raw[3] & addr_raw[4] & ~addr_raw[7]);
+
+	oneshot #(.CLEN(1198)) pos_oneshot (
+		.clk(clk_cpu),
+		.rst_n(rst_n),
+		.trigger(tape_output_trigger),
+		.nq(tape_output_pos)
+	);
+
+	oneshot #(.CLEN(1198*2)) neg_oneshot(
+		.clk(clk_cpu),
+		.rst_n  (rst_n),
+		.trigger(tape_output_trigger),
+		.nq(tape_output_neg)
+	);
+
 
 	kb_n_tape kb (
 		.ain    (addr      ),

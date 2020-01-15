@@ -181,15 +181,46 @@ module CobraDE2(
 	assign LEDG[0] = tape_input;
 	
 	// sync tape input to cpu clock
-	synchroniser #(.LVLS(4))(
+	synchroniser #(.LVLS(4)) sync1(
 		.clk(clk_cpu),
 		.dirty(tape_ths),
 		.clean(tape_input)
 	);
-	
+
+	wire tape_output_pos_dirty;
+	wire tape_output_neg_dirty;
+
+	wire tape_output_pos;
+	wire tape_output_neg;
+
+
+	synchroniser #(.LVLS(4)) sync_tapepos(
+		.clk(clk),
+		.dirty(tape_output_pos_dirty),
+		.clean(tape_output_pos)
+	);
+
+	synchroniser #(.LVLS(4)) sync_tapeneg(
+		.clk(clk),
+		.dirty(tape_output_neg_dirty),
+		.clean(tape_output_neg)
+	);
+
+	wire [23:0] tape_output_data;
+
+	always_comb begin : proc_tape_output_data
+		if (tape_output_pos) begin
+			tape_output_data = 24'd4194304;
+		end else
+		if (tape_output_neg) begin
+			tape_output_data = -24'd4194304;
+		end else begin
+			tape_output_data = 24'd0;
+		end
+	end
 	
 	audio_all foo(
-		.audio_0_avalon_left_channel_sink_data(24'b0),            //            audio_0_avalon_left_channel_sink.data
+		.audio_0_avalon_left_channel_sink_data(tape_output_data),            //            audio_0_avalon_left_channel_sink.data
 		.audio_0_avalon_left_channel_sink_valid(1'b1),           //                                            .valid
 		.audio_0_avalon_left_channel_sink_ready(),           //                                            .ready
 		.audio_0_avalon_right_channel_sink_data(24'b0),           //           audio_0_avalon_right_channel_sink.data
@@ -256,32 +287,34 @@ module CobraDE2(
 	
 	
 	cobra1 i_cobra1 (
-	.clk_cpu    (clk_cpu    ),
-	.clk_pxl    (clk_pxl    ),
-	.rst_n      (rst_n      ),
-	.kb_state   (kb_state   ),
-	.tape_input (tape_input ),
-	.cpu_ram_di (cpu_ram_di ),
-	.cpu_rom_di (cpu_rom_di ),
-	.v_font_di  (v_font_di  ),
-	.v_ram_di   (v_ram_di   ),
-	.cpu_ram_a  (cpu_ram_a  ),
-	.cpu_ram_do (cpu_ram_do ),
-	.cpu_ram_w  (cpu_ram_w  ),
-	.cpu_rom_a  (cpu_rom_a  ),
-	.v_font_a   (v_font_a   ),
-	.v_ram_a    (v_ram_a    ),
-	.v_ram_do   (v_ram_do   ),
-	.v_ram_w    (v_ram_w    ),
-	.VGA_B      (VGA_B      ),
-	.VGA_BLANK_N(VGA_BLANK_N),
-	.VGA_CLK    (VGA_CLK    ),
-	.VGA_G      (VGA_G      ),
-	.VGA_HS     (VGA_HS     ),
-	.VGA_R      (VGA_R      ),
-	.VGA_SYNC_N (VGA_SYNC_N ),
-	.VGA_VS     (VGA_VS     )
-);
+		.clk_cpu        (clk_cpu              ),
+		.clk_pxl        (clk_pxl              ),
+		.rst_n          (rst_n                ),
+		.kb_state       (kb_state             ),
+		.tape_input     (tape_input           ),
+		.cpu_ram_di     (cpu_ram_di           ),
+		.cpu_rom_di     (cpu_rom_di           ),
+		.v_font_di      (v_font_di            ),
+		.v_ram_di       (v_ram_di             ),
+		.cpu_ram_a      (cpu_ram_a            ),
+		.cpu_ram_do     (cpu_ram_do           ),
+		.cpu_ram_w      (cpu_ram_w            ),
+		.cpu_rom_a      (cpu_rom_a            ),
+		.v_font_a       (v_font_a             ),
+		.v_ram_a        (v_ram_a              ),
+		.v_ram_do       (v_ram_do             ),
+		.v_ram_w        (v_ram_w              ),
+		.VGA_B          (VGA_B                ),
+		.VGA_BLANK_N    (VGA_BLANK_N          ),
+		.VGA_CLK        (VGA_CLK              ),
+		.VGA_G          (VGA_G                ),
+		.VGA_HS         (VGA_HS               ),
+		.VGA_R          (VGA_R                ),
+		.VGA_SYNC_N     (VGA_SYNC_N           ),
+		.VGA_VS         (VGA_VS               ),
+		.tape_output_pos(tape_output_pos_dirty),
+		.tape_output_neg(tape_output_neg_dirty)
+	);
 	
 	
 
