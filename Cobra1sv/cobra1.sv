@@ -116,19 +116,14 @@ module cobra1 (
 
 	assign tape_output_trigger = ~iorq_n && (addr_raw[2] & addr_raw[3] & addr_raw[4] & ~addr_raw[7]);
 
-	oneshot #(.CLEN(1198)) pos_oneshot (
-		.clk(clk_cpu),
-		.rst_n(rst_n),
-		.trigger(tape_output_trigger),
-		.nq(tape_output_pos)
+	tape_output i_tape_output (
+		.clk_cpu        (clk_cpu            ),
+		.trigger        (tape_output_trigger),
+		.rst_n          (rst_n              ),
+		.tape_output_pos(tape_output_pos    ),
+		.tape_output_neg(tape_output_neg    )
 	);
 
-	oneshot #(.CLEN(1198*2)) neg_oneshot(
-		.clk(clk_cpu),
-		.rst_n  (rst_n),
-		.trigger(tape_output_trigger),
-		.nq(tape_output_neg)
-	);
 
 
 	kb_n_tape kb (
