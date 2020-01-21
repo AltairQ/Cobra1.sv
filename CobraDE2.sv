@@ -176,7 +176,7 @@ module CobraDE2(
 			
 	wire tape_ths;
 	
-	assign tape_ths = (left_audio_clean >= 24'sd1677721);
+	assign tape_ths = (left_audio_clean >= 24'sd419430);
 	
 	assign LEDG[0] = tape_input;
 	
