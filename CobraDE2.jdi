@@ -1,6 +1,6 @@
 <sld_project_info>
   <project>
-    <hash md5_digest_80b="5f2d28d0f93126fe138c"/>
+    <hash md5_digest_80b="4b29277155545312d66b"/>
   </project>
   <file_info>
     <file device="EP4CE115F29C7" path="CobraDE2.sof" usercode="0xFFFFFFFF"/>
@@ -8,7 +8,7 @@
   <sld_infos>
     <sld_info hpath="audio_all:foo" name="foo">
       <assignment_values>
-        <assignment_value text="QSYS_NAME audio_all HAS_SOPCINFO 1 GENERATION_ID 1579634783"/>
+        <assignment_value text="QSYS_NAME audio_all HAS_SOPCINFO 1 GENERATION_ID 1580253008"/>
       </assignment_values>
       <parameters/>
     </sld_info>

@@ -30,7 +30,8 @@ module cobra1 (
 	output        VGA_SYNC_N     ,
 	output        VGA_VS         ,
 	output        tape_output_pos,
-	output        tape_output_neg
+	output        tape_output_neg,
+	output        beep
 );
 
 	logic [7:0] mem_dout;
@@ -123,6 +124,19 @@ module cobra1 (
 		.tape_output_pos(tape_output_pos    ),
 		.tape_output_neg(tape_output_neg    )
 	);
+
+	wire beep_trigger;
+	assign beep_trigger = ~iorq_n && (~addr_raw[2] & addr_raw[3] & addr_raw[4] & ~addr_raw[7]);
+
+
+	oneshot i_oneshot (
+		.clk(clk_cpu),
+		.rst_n(rst_n),
+		.trigger(beep_trigger),
+		.q(beep)
+	);
+
+
 
 
 

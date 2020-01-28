@@ -253,6 +253,8 @@ module CobraDE2(
 	);
 
 	
+	wire beep;
+	assign LEDG[1] = beep;
 	
 
 	monitor_rom monitor(
@@ -313,7 +315,8 @@ module CobraDE2(
 		.VGA_SYNC_N     (VGA_SYNC_N           ),
 		.VGA_VS         (VGA_VS               ),
 		.tape_output_pos(tape_output_pos_dirty),
-		.tape_output_neg(tape_output_neg_dirty)
+		.tape_output_neg(tape_output_neg_dirty),
+		.beep           (beep)
 	);
 	
 	
