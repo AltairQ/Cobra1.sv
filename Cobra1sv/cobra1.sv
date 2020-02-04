@@ -64,7 +64,7 @@ module cobra1 (
 
 	always_comb begin
 		if(v_ctrl_override) begin
-			v_ram_a = addr[10:0]; // TODO maybe synchronise the address?
+			v_ram_a = addr[10:0];
 			v_ram_w = cpu_ram_w;
 		end else begin
 			v_ram_a = v_ram_a_vga;
@@ -135,9 +135,6 @@ module cobra1 (
 		.trigger(beep_trigger),
 		.q(beep)
 	);
-
-
-
 
 
 	kb_n_tape kb (

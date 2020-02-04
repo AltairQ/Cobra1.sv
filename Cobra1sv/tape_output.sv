@@ -19,28 +19,28 @@ module tape_output (
 		prev <= nq;
 
 	oneshot #(.CLEN(1198)) i_oneshot (
-		.clk(clk_cpu),
-		.rst_n(rst_n),
+		.clk    (clk_cpu),
+		.rst_n  (rst_n  ),
 		.trigger(trigger),
-		.q(),
-		.nq(nq)
+		.q      (       ),
+		.nq     (nq     )
 	);
 
 
 	oneshot #(.CLEN(599)) outpos (
-		.clk(clk_cpu),
-		.rst_n(rst_n),
-		.trigger(pedge),
-		.q(tape_output_pos),
-		.nq()
+		.clk    (clk_cpu        ),
+		.rst_n  (rst_n          ),
+		.trigger(pedge          ),
+		.q      (tape_output_pos),
+		.nq     (               )
 	);
 
 	oneshot #(.CLEN(599)) outneg (
-		.clk(clk_cpu),
-		.rst_n(rst_n),
-		.trigger(nedge),
-		.q(tape_output_neg),
-		.nq()
+		.clk    (clk_cpu        ),
+		.rst_n  (rst_n          ),
+		.trigger(nedge          ),
+		.q      (tape_output_neg),
+		.nq     (               )
 	);
 
 

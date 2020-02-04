@@ -2,7 +2,7 @@
   <sld_infos>
     <sld_info hpath="audio_all:foo" name="foo">
       <assignment_values>
-        <assignment_value text="QSYS_NAME audio_all HAS_SOPCINFO 1 GENERATION_ID 1580678250"/>
+        <assignment_value text="QSYS_NAME audio_all HAS_SOPCINFO 1 GENERATION_ID 1580779828"/>
       </assignment_values>
     </sld_info>
     <sld_info hpath="ps2:kbd" name="kbd">

@@ -74,25 +74,24 @@ module CobraDE2 (
 	wire [7:0] ps2_data;
 
 
-	ps2t keyboard_translator(
-		.clk(clk_cpu),
+	ps2t keyboard_translator (
+		.clk       (clk_cpu       ),
 		.data_valid(ps2_data_valid),
-		.data(ps2_data),
-		.kb_state(kb_state)
+		.data      (ps2_data      ),
+		.kb_state  (kb_state      )
 	);
 
 
-	ps2 kbd(
-		.ps2_0_PS2_CLK(PS2_CLK),
-		.ps2_0_PS2_DAT(PS2_DAT),
-		.ps2_0_command(8'b0),
-		.ps2_0_command_valid(1'b0),
-		//.ps2_0_command_ready(LEDR[1]),
-		.ps2_0_data_ready(1'b1),
-		.ps2_0_data(ps2_data),
-		.ps2_0_data_valid(ps2_data_valid),
-		.clk_clk(clk_cpu),
-		.reset_reset_n(1'b1)
+	ps2 kbd (
+		.ps2_0_PS2_CLK      (PS2_CLK       ),
+		.ps2_0_PS2_DAT      (PS2_DAT       ),
+		.ps2_0_command      (8'b0          ),
+		.ps2_0_command_valid(1'b0          ),
+		.ps2_0_data_ready   (1'b1          ),
+		.ps2_0_data         (ps2_data      ),
+		.ps2_0_data_valid   (ps2_data_valid),
+		.clk_clk            (clk_cpu       ),
+		.reset_reset_n      (1'b1          )
 	);
 
 
@@ -118,10 +117,10 @@ module CobraDE2 (
 
 	assign addr = cpu_ram_a;
 
-	pxl_pll i_pxl_pll(
-		.inclk0(clk),
-		.c0(clk_pxl),
-		.c1(clk_cpu)
+	pxl_pll i_pxl_pll (
+		.inclk0(clk    ),
+		.c0    (clk_pxl),
+		.c1    (clk_cpu)
 	);
 
 
@@ -141,9 +140,9 @@ module CobraDE2 (
 	assign LEDG[0] = tape_input;
 
 	// sync tape input to cpu clock
-	synchroniser #(.LVLS(4)) sync1(
-		.clk(clk_cpu),
-		.dirty(tape_ths),
+	synchroniser #(.LVLS(4)) sync1 (
+		.clk  (clk_cpu   ),
+		.dirty(tape_ths  ),
 		.clean(tape_input)
 	);
 
@@ -179,37 +178,34 @@ module CobraDE2 (
 		end
 	end
 
-	audio_all foo(
-		.audio_0_avalon_left_channel_sink_data(tape_output_data),            //            audio_0_avalon_left_channel_sink.data
-		.audio_0_avalon_left_channel_sink_valid(1'b1),           //                                            .valid
-		.audio_0_avalon_left_channel_sink_ready(),           //                                            .ready
-		.audio_0_avalon_right_channel_sink_data(24'b0),           //           audio_0_avalon_right_channel_sink.data
-		.audio_0_avalon_right_channel_sink_valid(1'b1),          //                                            .valid
-		.audio_0_avalon_right_channel_sink_ready(),          //                                            .ready
-
-
-
-		.audio_0_avalon_left_channel_source_ready(1'b1),         //          audio_0_avalon_left_channel_source.ready
-		.audio_0_avalon_left_channel_source_data(left_audio_raw),          //                                            .data
-		.audio_0_avalon_left_channel_source_valid(left_audio_valid),         //                                            .valid
-
-		.audio_0_avalon_right_channel_source_ready(1'b1),        //         audio_0_avalon_right_channel_source.ready
-		.audio_0_avalon_right_channel_source_data(),         //                                            .data
-		.audio_0_avalon_right_channel_source_valid(),        //                                            .valid
-
-		.audio_0_external_interface_ADCDAT(AUD_ADCDAT),                //                  audio_0_external_interface.ADCDAT
-		.audio_0_external_interface_ADCLRCK(AUD_ADCLRCK),               //                                            .ADCLRCK
-		.audio_0_external_interface_BCLK(AUD_BCLK),                  //                                            .BCLK
-		.audio_0_external_interface_DACDAT(AUD_DACDAT),                //                                            .DACDAT
-		.audio_0_external_interface_DACLRCK(AUD_DACLRCK),               //                                            .DACLRCK
-
-		.audio_and_video_config_0_external_interface_SDAT(I2C_SDAT), // audio_and_video_config_0_external_interface.SDAT
-		.audio_and_video_config_0_external_interface_SCLK(I2C_SCLK), //                                            .SCLK
-
-		.clk_clk(clk),                                          //                                         clk.clk
-		.clock_bridge_0_out_clk_clk(AUD_XCK),                                    //                                   clk_1_clk.clk
-		.reset_reset_n(1'b1)                                     //                                       reset.reset_n
-
+	audio_all foo (
+		.audio_0_avalon_left_channel_sink_data           (tape_output_data),
+		.audio_0_avalon_left_channel_sink_valid          (1'b1            ),
+		.audio_0_avalon_left_channel_sink_ready          (                ),
+		.audio_0_avalon_right_channel_sink_data          (24'b0           ),
+		.audio_0_avalon_right_channel_sink_valid         (1'b1            ),
+		.audio_0_avalon_right_channel_sink_ready         (                ),
+		
+		.audio_0_avalon_left_channel_source_ready        (1'b1            ),
+		.audio_0_avalon_left_channel_source_data         (left_audio_raw  ),
+		.audio_0_avalon_left_channel_source_valid        (left_audio_valid),
+		
+		.audio_0_avalon_right_channel_source_ready       (1'b1            ),
+		.audio_0_avalon_right_channel_source_data        (                ),
+		.audio_0_avalon_right_channel_source_valid       (                ),
+		
+		.audio_0_external_interface_ADCDAT               (AUD_ADCDAT      ),
+		.audio_0_external_interface_ADCLRCK              (AUD_ADCLRCK     ),
+		.audio_0_external_interface_BCLK                 (AUD_BCLK        ),
+		.audio_0_external_interface_DACDAT               (AUD_DACDAT      ),
+		.audio_0_external_interface_DACLRCK              (AUD_DACLRCK     ),
+		
+		.audio_and_video_config_0_external_interface_SDAT(I2C_SDAT        ),
+		.audio_and_video_config_0_external_interface_SCLK(I2C_SCLK        ),
+		
+		.clk_clk                                         (clk             ),
+		.clock_bridge_0_out_clk_clk                      (AUD_XCK         ),
+		.reset_reset_n                                   (1'b1            )
 	);
 
 
@@ -217,34 +213,34 @@ module CobraDE2 (
 	assign LEDG[1] = beep;
 
 
-	monitor_rom monitor(
-		.address  (cpu_rom_a),
-		.clock(clk_cpu),
-		.q(cpu_rom_di)
+	monitor_rom monitor (
+		.address(cpu_rom_a ),
+		.clock  (clk_cpu   ),
+		.q      (cpu_rom_di)
 	);
 
 
-	font_rom_ip font_rom(
-		.address(v_font_a),
-		.clock(clk_pxl),
-		.q(v_font_di)
+	font_rom_ip font_rom (
+		.address(v_font_a ),
+		.clock  (clk_pxl  ),
+		.q      (v_font_di)
 	);
 
 
 	cpu_ram cpu_ram (
-		.clock (clk_cpu),
-		.address   (cpu_ram_a ),
-		.data (cpu_ram_do),
+		.clock  (clk_cpu   ),
+		.address(cpu_ram_a ),
+		.data   (cpu_ram_do),
 		.wren   (cpu_ram_w ),
-		.q(cpu_ram_di)
+		.q      (cpu_ram_di)
 	);
 
-	vram_ip i_vram_ip(
-		.address(v_ram_a),
-		.clock(clk_pxl),
-		.data(cpu_ram_do),
-		.wren(v_ram_w),
-		.q(v_ram_di)
+	vram_ip i_vram_ip (
+		.address(v_ram_a   ),
+		.clock  (clk_pxl   ),
+		.data   (cpu_ram_do),
+		.wren   (v_ram_w   ),
+		.q      (v_ram_di  )
 	);
 
 
