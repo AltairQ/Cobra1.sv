@@ -27,7 +27,6 @@ module vga_controller (
 	logic [7:0] crow_bits; // bitmask for current character's row
 	logic cpxl; // current pixel's mono colour
 
-	// TODO parametrize the timing constants
 	assign VGA_HS = !(h_cnt > (640+16) && h_cnt <= (640+16+96));
 	assign VGA_VS = !(v_cnt > (400+12) && v_cnt <= (400+12+2));
 
